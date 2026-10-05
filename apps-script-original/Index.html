@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base target="_top">
+
+  <style>
+    :root {
+      --fundo: #f8f5ef;
+      --branco: #ffffff;
+      --texto: #2c241e;
+      --texto-suave: #756b63;
+      --borda: #e7ddd1;
+      --principal: #c84f22;
+      --principal-escuro: #963716;
+      --principal-claro: #fff0e8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--fundo);
+    }
+
+    body {
+      margin: 0;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .aplicativo {
+      width: min(1100px, 100%);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 28px 40px;
+    }
+
+    /* Cabeçalho */
+
+    .cabecalho {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .logotipo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      background: var(--principal);
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .cabecalho-texto {
+      flex: 1;
+    }
+
+    .cabecalho-texto p {
+      margin: 0 0 2px;
+      color: var(--principal);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .cabecalho-texto h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 32px;
+    }
+
+    .contador {
+      color: var(--texto-suave);
+      text-align: right;
+    }
+
+    .contador strong {
+      display: block;
+      color: var(--texto);
+      font-size: 23px;
+    }
+
+    .contador span {
+      font-size: 12px;
+    }
+
+    /* Área fixa de pesquisa */
+
+    .area-pesquisa {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      padding: 10px 0 16px;
+      background: rgba(248, 245, 239, 0.96);
+    }
+
+    .pesquisa {
+      display: flex;
+      align-items: center;
+      min-height: 70px;
+      padding: 0 12px 0 20px;
+      border: 2px solid var(--borda);
+      border-radius: 20px;
+      background: var(--branco);
+      box-shadow: 0 8px 28px rgba(70, 48, 32, 0.08);
+    }
+
+    .pesquisa:focus-within {
+      border-color: var(--principal);
+    }
+
+    .icone-pesquisa {
+      color: var(--principal);
+      font-size: 27px;
+    }
+
+    .pesquisa input {
+      flex: 1;
+      height: 66px;
+      min-width: 0;
+      border: none;
+      outline: none;
+      padding: 0 16px;
+      background: transparent;
+      color: var(--texto);
+      font-size: 22px;
+    }
+
+    .pesquisa input::placeholder {
+      color: #a49990;
+    }
+
+    .botao-limpar {
+      min-height: 46px;
+      border: none;
+      border-radius: 13px;
+      padding: 0 18px;
+      background: var(--principal-claro);
+      color: var(--principal-escuro);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Categorias */
+
+    .categorias {
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      padding-top: 13px;
+      scrollbar-width: none;
+    }
+
+    .categorias::-webkit-scrollbar {
+      display: none;
+    }
+
+    .categoria {
+      min-height: 45px;
+      border: 1px solid var(--borda);
+      border-radius: 999px;
+      padding: 0 20px;
+      background: var(--branco);
+      color: #61564d;
+      font-weight: bold;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .categoria.ativa {
+      border-color: var(--principal);
+      background: var(--principal);
+      color: white;
+    }
+
+    /* Tabelas */
+
+    .secao-categoria {
+      margin: 10px 0 28px;
+    }
+
+    .titulo-categoria {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 0 4px 10px;
+    }
+
+    .titulo-categoria h2 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 26px;
+    }
+
+    .titulo-categoria span {
+      color: var(--texto-suave);
+      font-size: 13px;
+    }
+
+    .tabela {
+      overflow: hidden;
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      background: var(--branco);
+      box-shadow: 0 6px 22px rgba(70, 48, 32, 0.05);
+    }
+
+    .cabecalho-tabela,
+    .linha-produto {
+      display: grid;
+      grid-template-columns: 100px 1fr 160px;
+      align-items: center;
+    }
+
+    .cabecalho-tabela {
+      min-height: 40px;
+      padding: 0 18px;
+      background: #f7f2eb;
+      color: #897b70;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cabecalho-tabela span:last-child {
+      text-align: center;
+    }
+
+    .linha-produto {
+      min-height: 96px;
+      padding: 10px 18px;
+      border-top: 1px solid #eee5da;
+    }
+
+    .imagem-produto {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #f1ebe4;
+      color: #a39589;
+      font-size: 27px;
+    }
+
+    .imagem-produto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nome-produto {
+      padding-right: 18px;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .codigo-produto {
+      border-radius: 13px;
+      padding: 13px 10px;
+      background: var(--principal-claro);
+      color: var(--principal-escuro);
+      text-align: center;
+      font-size: 27px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Estados */
+
+    .carregando,
+    .sem-resultados,
+    .erro {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .carregando-circulo {
+      width: 46px;
+      height: 46px;
+      margin-bottom: 15px;
+      border: 5px solid #eadfd4;
+      border-top-color: var(--principal);
+      border-radius: 50%;
+      animation: girar 0.8s linear infinite;
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .sem-resultados h2,
+    .erro h2 {
+      margin: 5px 0;
+      font-family: Georgia, serif;
+    }
+
+    .sem-resultados p,
+    .erro p {
+      color: var(--texto-suave);
+    }
+
+    .botao-mostrar-todos {
+      min-height: 48px;
+      border: none;
+      border-radius: 14px;
+      padding: 0 20px;
+      background: var(--principal);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .botao-atualizar {
+  min-height: 45px;
+  margin-left: auto;
+  border: 1px solid var(--borda);
+  border-radius: 13px;
+  padding: 0 17px;
+  background: var(--branco);
+  color: var(--principal-escuro);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botao-atualizar:active {
+  background: var(--principal-claro);
+}
+
+.botao-atualizar:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.linha-produto {
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.linha-produto:hover {
+  background: #fffaf6;
+}
+
+.linha-produto:active {
+  background: var(--principal-claro);
+  transform: scale(0.995);
+}
+.acoes-cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 145px;
+  margin-left: auto;
+}
+
+.acoes-cabecalho .botao-atualizar {
+  width: 100%;
+  margin-left: 0;
+}
+
+.botao-limpar-filtros {
+  min-height: 38px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 0 14px;
+  background: var(--principal-claro);
+  color: var(--principal-escuro);
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botao-limpar-filtros:active {
+  background: #f9ded0;
+}
+.modal-codigo {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: rgba(42, 32, 24, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.modal-codigo[hidden] {
+  display: none;
+}
+
+.modal-conteudo {
+  position: relative;
+  width: min(600px, 100%);
+  border-radius: 28px;
+  padding: 42px 38px 35px;
+  background: var(--branco);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #f3ede6;
+  color: var(--texto);
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-conteudo p {
+  margin: 0 0 12px;
+  color: var(--principal);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.modal-conteudo h2 {
+  margin: 0 0 24px;
+  color: var(--texto);
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 5vw, 43px);
+  line-height: 1.1;
+}
+
+.modal-conteudo > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.modal-conteudo > strong {
+  display: block;
+  margin-bottom: 30px;
+  color: var(--principal-escuro);
+  font-size: clamp(65px, 13vw, 105px);
+  line-height: 1;
+  letter-spacing: 4px;
+}
+
+.modal-voltar {
+  min-height: 55px;
+  border: none;
+  border-radius: 15px;
+  padding: 0 25px;
+  background: var(--principal);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-imagem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 145px;
+  height: 145px;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  border: 3px solid #f0e6dc;
+  border-radius: 22px;
+  background: #f5efe8;
+}
+.modal-imagem img,
+.modal-imagem span {
+  position: absolute;
+  inset: 0;
+}
+.modal-imagem img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-imagem span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #a39589;
+  font-size: 48px;
+}
+
+    @media (max-width: 650px) {
+      .aplicativo {
+        padding: 18px 13px 30px;
+      }
+
+      .contador {
+        display: none;
+      }
+
+      .cabecalho-texto h1 {
+        font-size: 26px;
+      }
+
+      .logotipo {
+        width: 45px;
+        height: 45px;
+      }
+
+      .pesquisa {
+        min-height: 62px;
+        padding-left: 15px;
+      }
+
+      .pesquisa input {
+        height: 58px;
+        padding: 0 11px;
+        font-size: 18px;
+      }
+      .topo-fixo {
+  padding-top: 5px;
+  padding-bottom: 7px;
+}
+      .cabecalho-tabela,
+      .linha-produto {
+        grid-template-columns: 76px 1fr 110px;
+      }
+      .acoes-cabecalho {
+  min-width: 125px;
+  gap: 5px;
+}
+
+.botao-limpar-filtros {
+  min-height: 36px;
+  padding: 0 9px;
+  font-size: 12px;
+}
+      .cabecalho-tabela,
+      .linha-produto {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .linha-produto {
+        min-height: 84px;
+      }
+
+      .imagem-produto {
+        width: 60px;
+        height: 60px;
+      }
+
+      .nome-produto {
+        font-size: 17px;
+      }
+
+      .codigo-produto {
+        padding: 12px 5px;
+        font-size: 22px;
+      }
+      .botao-atualizar {
+      min-height: 42px;
+      padding: 0 12px;
+      font-size: 13px;
+      }
+
+      .modal-conteudo {
+        padding: 42px 20px 28px;
+      }
+
+      .modal-conteudo > strong {
+        font-size: 70px;
+      }
+      .ultima-atualizacao {
+  font-size: 10px;
+}
+    }
+    .topo-fixo {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  padding-top: 8px;
+  padding-bottom: 10px;
+  background: rgba(250, 247, 243, 0.97);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 18px rgba(55, 38, 25, 0.08);
+}
+
+.topo-fixo .area-pesquisa {
+  position: static;
+  padding-bottom: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.topo-fixo .area-pesquisa::after {
+  display: none;
+}
+.ultima-atualizacao {
+  display: block;
+  color: var(--texto-suave);
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+.aviso-conexao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 9px;
+  border: 1px solid #e1b85a;
+  border-radius: 12px;
+  padding: 9px 13px;
+  background: #fff4d6;
+  color: #6e4a00;
+}
+
+.aviso-conexao[hidden] {
+  display: none;
+}
+
+.aviso-conexao > span {
+  font-size: 22px;
+}
+
+.aviso-conexao strong {
+  display: block;
+  font-size: 13px;
+}
+
+.aviso-conexao p {
+  margin: 2px 0 0;
+  font-size: 11px;
+}
+  </style>
+</head>
+
+<body>
+  <main class="aplicativo">
+    <div class="topo-fixo">
+    <header class="cabecalho">
+      <div class="logotipo">P</div>
+
+      <div class="cabecalho-texto">
+        <p>PADARIA</p>
+        <h1>Consulta de produtos</h1>
+      </div>
+
+      <div class="acoes-cabecalho">
+  <button
+    id="botaoAtualizar"
+    class="botao-atualizar"
+    type="button"
+    onclick="atualizarProdutos()"
+  >
+    ↻ Atualizar
+  </button>
+
+  <button
+    class="botao-limpar-filtros"
+    type="button"
+    onclick="limparTodosFiltros()"
+  >
+    × Limpar filtros
+  </button>
+  <span id="ultimaAtualizacao" class="ultima-atualizacao">
+  Carregando produtos...
+</span>
+</div>
+
+      <div class="contador">
+        <strong id="quantidadeProdutos">0</strong>
+        <span>produtos</span>
+      </div>
+    </header>
+
+    <section class="area-pesquisa">
+      <div class="pesquisa">
+        <span class="icone-pesquisa">⌕</span>
+
+        <input
+          id="campoPesquisa"
+          type="search"
+          placeholder="Digite o nome ou o código"
+          autocomplete="off"
+          oninput="filtrarProdutos()"
+        >
+
+        <button
+          id="botaoLimpar"
+          class="botao-limpar"
+          onclick="limparPesquisa()"
+          hidden
+        >
+          Limpar
+        </button>
+      </div>
+
+      <nav id="listaCategorias" class="categorias"></nav>
+    </section>
+    <div
+  id="avisoConexao"
+  class="aviso-conexao"
+  role="status"
+  hidden
+>
+  <span>⚠</span>
+
+  <div>
+    <strong>Sem conexão</strong>
+    <p>Exibindo a última lista carregada.</p>
+  </div>
+</div>
+    </div>
+
+    <section id="conteudo">
+      <div class="carregando">
+        <div class="carregando-circulo"></div>
+        <strong>Carregando produtos...</strong>
+      </div>
+    </section>
+    <div
+  id="modalCodigo"
+  class="modal-codigo"
+  onclick="fecharCodigo(event)"
+  hidden
+>
+  <div
+    class="modal-conteudo"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalNomeProduto"
+  >
+    <button
+      class="modal-fechar"
+      type="button"
+      onclick="fecharCodigo()"
+      aria-label="Fechar"
+    >
+      ×
+    </button>
+
+    <p>PRODUTO SELECIONADO</p>
+
+<div class="modal-imagem">
+  <img
+    id="modalImagemProduto"
+    src=""
+    alt=""
+  >
+
+  <span id="modalImagemPadrao">📷</span>
+</div>
+
+<h2 id="modalNomeProduto"></h2>
+
+    <span>CÓDIGO</span>
+
+    <strong id="modalNumeroCodigo"></strong>
+
+    <button
+      class="modal-voltar"
+      type="button"
+      onclick="fecharCodigo()"
+    >
+      Voltar para a pesquisa
+    </button>
+  </div>
+</div>
+  </main>
+
+  <script>
+    let todosProdutos = [];
+    let categoriaSelecionada = 'Todos';
+
+    document.addEventListener('DOMContentLoaded', carregarProdutos);
+
+    function carregarProdutos() {
+  const botao = document.getElementById('botaoAtualizar');
+
+  if (botao) {
+    botao.disabled = true;
+    botao.textContent = '↻ Atualizando...';
+  }
+
+  google.script.run
+    .withSuccessHandler(function(produtos) {
+      todosProdutos = Array.isArray(produtos) ? produtos : [];
+      atualizarEstadoConexao(true);
+      criarBotoesCategorias();
+      filtrarProdutos();
+      const agora = new Date();
+
+const horario = agora.toLocaleTimeString('pt-BR', {
+  hour: '2-digit',
+  minute: '2-digit'
+});
+
+document.getElementById('ultimaAtualizacao').textContent =
+  'Atualizado às ' + horario;
+
+      if (botao) {
+        botao.disabled = false;
+        botao.textContent = '✓ Atualizado';
+
+        setTimeout(function() {
+          botao.textContent = '↻ Atualizar';
+        }, 1500);
+      }
+    })
+    .withFailureHandler(function(erro) {
+      .withFailureHandler(function(erro) {
+  if (botao) {
+    botao.disabled = false;
+    botao.textContent = '↻ Tentar novamente';
+  }
+
+  atualizarEstadoConexao(false);
+
+  const horario = document.getElementById('ultimaAtualizacao');
+
+  if (horario) {
+    horario.textContent = 'Falha ao atualizar';
+  }
+
+  // Só substitui a tela por um erro se nenhuma lista tiver sido carregada
+  if (todosProdutos.length === 0) {
+    mostrarErro(erro);
+  }
+})
+    })
+    .buscarProdutos();
+}
+
+    function criarBotoesCategorias() {
+      const categorias = [...new Set(
+        todosProdutos.map(produto => produto.categoria)
+      )].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+      const lista = document.getElementById('listaCategorias');
+      lista.innerHTML = '';
+
+      ['Todos', ...categorias].forEach(function(categoria) {
+        const botao = document.createElement('button');
+
+        botao.type = 'button';
+        botao.className = 'categoria';
+
+        if (categoria === categoriaSelecionada) {
+          botao.classList.add('ativa');
+        }
+
+        botao.textContent = categoria;
+
+        botao.addEventListener('click', function() {
+          categoriaSelecionada = categoria;
+          criarBotoesCategorias();
+          filtrarProdutos();
+        });
+
+        lista.appendChild(botao);
+      });
+    }
+
+    function normalizarTexto(texto) {
+      return String(texto || '')
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .trim();
+    }
+
+    function filtrarProdutos() {
+      const campo = document.getElementById('campoPesquisa');
+      const pesquisa = normalizarTexto(campo.value);
+
+      document.getElementById('botaoLimpar').hidden = !campo.value;
+
+      const produtosFiltrados = todosProdutos.filter(function(produto) {
+        const pertenceCategoria =
+          categoriaSelecionada === 'Todos' ||
+          produto.categoria === categoriaSelecionada;
+
+        const textoProduto = normalizarTexto(
+          produto.nome + ' ' + produto.codigo
+        );
+
+        return pertenceCategoria && textoProduto.includes(pesquisa);
+      });
+
+      document.getElementById('quantidadeProdutos').textContent =
+        produtosFiltrados.length;
+
+      exibirProdutos(produtosFiltrados);
+    }
+
+    function exibirProdutos(produtos) {
+      const conteudo = document.getElementById('conteudo');
+      conteudo.innerHTML = '';
+
+      if (produtos.length === 0) {
+        const estado = document.createElement('div');
+        estado.className = 'sem-resultados';
+
+        const titulo = document.createElement('h2');
+        titulo.textContent = 'Produto não encontrado';
+
+        const texto = document.createElement('p');
+        texto.textContent =
+          'Confira o nome digitado ou selecione outra categoria.';
+
+        const botao = document.createElement('button');
+        botao.className = 'botao-mostrar-todos';
+        botao.textContent = 'Mostrar todos os produtos';
+        botao.onclick = mostrarTodos;
+
+        estado.append(titulo, texto, botao);
+        conteudo.appendChild(estado);
+        return;
+      }
+
+      const grupos = {};
+
+      produtos.forEach(function(produto) {
+        if (!grupos[produto.categoria]) {
+          grupos[produto.categoria] = [];
+        }
+
+        grupos[produto.categoria].push(produto);
+      });
+
+      Object.keys(grupos)
+        .sort((a, b) => a.localeCompare(b, 'pt-BR'))
+        .forEach(function(categoria) {
+          const secao = criarSecaoCategoria(categoria, grupos[categoria]);
+          conteudo.appendChild(secao);
+        });
+    }
+
+    function criarSecaoCategoria(categoria, produtos) {
+      const secao = document.createElement('section');
+      secao.className = 'secao-categoria';
+
+      const tituloArea = document.createElement('div');
+      tituloArea.className = 'titulo-categoria';
+
+      const titulo = document.createElement('h2');
+      titulo.textContent = categoria;
+
+      const quantidade = document.createElement('span');
+      quantidade.textContent =
+        produtos.length + (produtos.length === 1 ? ' item' : ' itens');
+
+      tituloArea.append(titulo, quantidade);
+
+      const tabela = document.createElement('div');
+      tabela.className = 'tabela';
+
+      const cabecalho = document.createElement('div');
+      cabecalho.className = 'cabecalho-tabela';
+
+      ['Imagem', 'Produto', 'Código'].forEach(function(texto) {
+        const coluna = document.createElement('span');
+        coluna.textContent = texto;
+        cabecalho.appendChild(coluna);
+      });
+
+      tabela.appendChild(cabecalho);
+
+      produtos
+        .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'))
+        .forEach(function(produto) {
+          tabela.appendChild(criarLinhaProduto(produto));
+        });
+
+      secao.append(tituloArea, tabela);
+      return secao;
+    }
+
+    function criarLinhaProduto(produto) {
+      const linha = document.createElement('div');
+      linha.className = 'linha-produto';
+      linha.tabIndex = 0;
+linha.setAttribute('role', 'button');
+linha.setAttribute(
+  'aria-label',
+  produto.nome + ', código ' + produto.codigo
+);
+
+linha.addEventListener('click', function() {
+  const imagemDaLinha = linha.querySelector('img');
+  abrirCodigo(produto, imagemDaLinha);
+});
+
+linha.addEventListener('keydown', function(evento) {
+  if (evento.key === 'Enter' || evento.key === ' ') {
+    evento.preventDefault();
+
+    const imagemDaLinha = linha.querySelector('img');
+    abrirCodigo(produto, imagemDaLinha);
+  }
+});
+
+      const areaImagem = document.createElement('div');
+      areaImagem.className = 'imagem-produto';
+
+      if (produto.imagem) {
+        const imagem = document.createElement('img');
+        imagem.src = produto.imagem;
+        imagem.alt = produto.nome;
+        imagem.loading = 'lazy';
+
+        imagem.onerror = function() {
+          areaImagem.innerHTML = '📷';
+        };
+
+        areaImagem.appendChild(imagem);
+      } else {
+        areaImagem.textContent = '📷';
+      }
+
+      const nome = document.createElement('div');
+      nome.className = 'nome-produto';
+      nome.textContent = produto.nome;
+
+      const codigo = document.createElement('div');
+      codigo.className = 'codigo-produto';
+      codigo.textContent = produto.codigo;
+
+      linha.append(areaImagem, nome, codigo);
+      return linha;
+    }
+
+    function limparPesquisa() {
+      const campo = document.getElementById('campoPesquisa');
+      campo.value = '';
+      campo.focus();
+      filtrarProdutos();
+    }
+
+    function mostrarTodos() {
+      categoriaSelecionada = 'Todos';
+      document.getElementById('campoPesquisa').value = '';
+      criarBotoesCategorias();
+      filtrarProdutos();
+    }
+    function abrirCodigo(produto, imagemDaLinha) {
+  const imagemPopup =
+    document.getElementById('modalImagemProduto');
+
+  const imagemPadrao =
+    document.getElementById('modalImagemPadrao');
+
+  document.getElementById('modalNomeProduto').textContent =
+    produto.nome;
+
+  document.getElementById('modalNumeroCodigo').textContent =
+    produto.codigo;
+
+  imagemPopup.onload = null;
+  imagemPopup.onerror = null;
+  imagemPopup.removeAttribute('src');
+  imagemPopup.style.display = 'none';
+  imagemPadrao.style.display = 'flex';
+
+  const imagemCarregada =
+    imagemDaLinha &&
+    imagemDaLinha.complete &&
+    imagemDaLinha.naturalWidth > 0;
+
+  if (imagemCarregada) {
+    imagemPopup.onload = function() {
+      imagemPopup.style.display = 'block';
+      imagemPadrao.style.display = 'none';
+    };
+
+    imagemPopup.onerror = function() {
+      imagemPopup.style.display = 'none';
+      imagemPadrao.style.display = 'flex';
+    };
+
+    // Reutiliza o mesmo endereço da imagem já exibida na lista
+    imagemPopup.src =
+      imagemDaLinha.currentSrc || imagemDaLinha.src;
+
+    if (
+      imagemPopup.complete &&
+      imagemPopup.naturalWidth > 0
+    ) {
+      imagemPopup.style.display = 'block';
+      imagemPadrao.style.display = 'none';
+    }
+  }
+
+  document.getElementById('modalCodigo').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharCodigo(evento) {
+  const modal = document.getElementById('modalCodigo');
+
+  if (
+    evento &&
+    evento.target !== modal
+  ) {
+    return;
+  }
+
+  modal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function atualizarProdutos() {
+  carregarProdutos();
+}
+
+// Atualiza os produtos automaticamente a cada 5 minutos
+setInterval(function() {
+  carregarProdutos();
+}, 5 * 60 * 1000);
+
+document.addEventListener('keydown', function(evento) {
+  if (evento.key === 'Escape') {
+    fecharCodigo();
+  }
+});
+    function mostrarErro(erro) {
+      const conteudo = document.getElementById('conteudo');
+      conteudo.innerHTML = '';
+
+      const estado = document.createElement('div');
+      estado.className = 'erro';
+
+      const titulo = document.createElement('h2');
+      titulo.textContent = 'Não foi possível carregar os produtos';
+
+      const texto = document.createElement('p');
+      texto.textContent =
+        erro && erro.message
+          ? erro.message
+          : 'Tente atualizar a página.';
+
+      estado.append(titulo, texto);
+      conteudo.appendChild(estado);
+    }
+    function limparTodosFiltros() {
+  voltarTelaInicial(true);
+}
+
+function voltarTelaInicial(focarPesquisa) {
+  categoriaSelecionada = 'Todos';
+
+  const campo = document.getElementById('campoPesquisa');
+  campo.value = '';
+
+  criarBotoesCategorias();
+  filtrarProdutos();
+
+  document.getElementById('listaCategorias').scrollLeft = 0;
+
+  fecharCodigo();
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+  if (focarPesquisa) {
+    campo.focus();
+  } else {
+    campo.blur();
+  }
+}
+  const TEMPO_INATIVIDADE = 100 * 1000;
+let temporizadorInatividade;
+
+function reiniciarTemporizadorInatividade() {
+  clearTimeout(temporizadorInatividade);
+
+  temporizadorInatividade = setTimeout(function() {
+    voltarTelaInicial(false);
+  }, TEMPO_INATIVIDADE);
+}
+
+[
+  'pointerdown',
+  'keydown',
+  'input',
+  'scroll'
+].forEach(function(evento) {
+  document.addEventListener(
+    evento,
+    reiniciarTemporizadorInatividade,
+    { passive: true }
+  );
+});
+
+reiniciarTemporizadorInatividade();
+function atualizarEstadoConexao(conectado) {
+  const aviso = document.getElementById('avisoConexao');
+
+  if (!aviso) {
+    return;
+  }
+
+  aviso.hidden = conectado;
+}
+
+window.addEventListener('offline', function() {
+  atualizarEstadoConexao(false);
+
+  const horario = document.getElementById('ultimaAtualizacao');
+
+  if (horario) {
+    horario.textContent = 'Sem conexão';
+  }
+});
+
+window.addEventListener('online', function() {
+  atualizarEstadoConexao(true);
+  carregarProdutos();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  atualizarEstadoConexao(navigator.onLine);
+});
+  </script>
+</body>
+</html>
