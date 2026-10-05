@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Produtos</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+
+  <style>
+    :root {
+      --fundo: #f8f5ef;
+      --branco: #ffffff;
+      --texto: #2c241e;
+      --texto-suave: #756b63;
+      --borda: #e7ddd1;
+      --principal: #c84f22;
+      --principal-escuro: #963716;
+      --principal-claro: #fff0e8;
+      --perigo: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .aplicativo {
+      width: min(1000px, 100%);
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    .cabecalho {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .cabecalho h1 {
+      flex: 1;
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 28px;
+    }
+
+    .cartao {
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      padding: 20px;
+      background: var(--branco);
+      box-shadow: 0 6px 22px rgba(70, 48, 32, 0.05);
+    }
+
+    .cartao + .cartao {
+      margin-top: 16px;
+    }
+
+    .cartao h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+    }
+
+    .cartao p {
+      color: var(--texto-suave);
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--texto-suave);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="url"] {
+      display: block;
+      width: 100%;
+      min-height: 46px;
+      margin-top: 5px;
+      border: 2px solid var(--borda);
+      border-radius: 12px;
+      padding: 0 12px;
+      background: var(--branco);
+      color: var(--texto);
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: var(--principal);
+      outline: none;
+    }
+
+    .botao {
+      min-height: 44px;
+      border: none;
+      border-radius: 12px;
+      padding: 0 18px;
+      background: var(--principal);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .botao.secundario {
+      border: 1px solid var(--borda);
+      background: var(--branco);
+      color: var(--principal-escuro);
+    }
+
+    .botao.perigo {
+      background: var(--perigo);
+    }
+
+    .botao:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .barra {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .barra input[type="search"] {
+      flex: 1;
+      min-width: 200px;
+      margin-top: 0;
+    }
+
+    .mensagem {
+      min-height: 20px;
+      margin: 10px 0 0;
+      font-weight: bold;
+    }
+
+    .mensagem.erro {
+      color: var(--perigo);
+    }
+
+    .mensagem.ok {
+      color: #1e7b34;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border-top: 1px solid #eee5da;
+      padding: 8px 6px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      color: #897b70;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    tbody tr {
+      cursor: pointer;
+    }
+
+    tbody tr:hover {
+      background: #fffaf6;
+    }
+
+    tr.inativo td {
+      color: #a49990;
+    }
+
+    .miniatura {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #f1ebe4;
+    }
+
+    .miniatura img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .codigo {
+      color: var(--principal-escuro);
+      font-weight: bold;
+    }
+
+    .grade {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0 14px;
+    }
+
+    .ativo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--texto);
+      font-size: 16px;
+    }
+
+    .ativo input {
+      width: 22px;
+      height: 22px;
+    }
+
+    dialog {
+      width: min(560px, calc(100% - 32px));
+      border: none;
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    dialog::backdrop {
+      background: rgba(42, 32, 24, 0.6);
+    }
+
+    dialog h2 {
+      margin-top: 0;
+      font-family: Georgia, serif;
+    }
+
+    .acoes-dialogo {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .acoes-dialogo .botao.perigo {
+      margin-right: auto;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 650px) {
+      .grade {
+        grid-template-columns: 1fr;
+      }
+
+      .col-categoria {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="aplicativo">
+    <header class="cabecalho">
+      <h1>Cadastro de produtos</h1>
+      <a class="botao secundario" href="./" style="display:flex;align-items:center;text-decoration:none">Ver tela do tablet</a>
+      <button id="botaoSair" class="botao secundario" type="button" hidden>Sair</button>
+    </header>
+
+    <!-- Firebase ainda não configurado -->
+    <section id="semFirebase" class="cartao" hidden>
+      <h2>Firebase ainda não configurado</h2>
+      <p>
+        Enquanto o arquivo <code>js/config.js</code> não tiver a configuração do Firebase,
+        o tablet mostra a lista fixa que veio da planilha (<code>dados/produtos.json</code>)
+        e esta tela de cadastro não funciona. O passo a passo está no README do projeto.
+      </p>
+    </section>
+
+    <!-- Login -->
+    <section id="telaLogin" class="cartao" hidden>
+      <h2>Entrar</h2>
+      <form id="formLogin">
+        <label>E-mail
+          <input id="loginEmail" type="email" autocomplete="username" required>
+        </label>
+        <label>Senha
+          <input id="loginSenha" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="botao" type="submit">Entrar</button>
+        <p id="mensagemLogin" class="mensagem erro"></p>
+      </form>
+    </section>
+
+    <!-- Lista de produtos -->
+    <section id="telaCadastro" hidden>
+      <div id="avisoVazio" class="cartao" hidden>
+        <h2>O catálogo está vazio</h2>
+        <p>Importe os produtos que vieram da planilha para começar.</p>
+        <button id="botaoImportar" class="botao" type="button">Importar lista da planilha</button>
+      </div>
+
+      <div class="cartao">
+        <div class="barra">
+          <input id="campoBusca" type="search" placeholder="Buscar por nome, código ou categoria" autocomplete="off">
+          <button id="botaoNovo" class="botao" type="button">+ Novo produto</button>
+        </div>
+        <p id="resumo" class="mensagem"></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Código</th>
+              <th>Nome</th>
+              <th class="col-categoria">Categoria</th>
+              <th>Ativo</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabela"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dialogoProduto">
+    <form id="formProduto" method="dialog">
+      <h2 id="tituloDialogo">Produto</h2>
+      <div class="grade">
+        <label>Código
+          <input id="campoCodigo" type="text" inputmode="numeric" required>
+        </label>
+        <label>Nome
+          <input id="campoNome" type="text" required>
+        </label>
+      </div>
+      <label>Categoria
+        <input id="campoCategoria" type="text" list="listaCategorias">
+        <datalist id="listaCategorias"></datalist>
+      </label>
+      <label>Link da foto (Google Drive ou endereço de imagem)
+        <input id="campoImagem" type="url">
+      </label>
+      <label class="ativo">
+        <input id="campoAtivo" type="checkbox"> Aparece no tablet
+      </label>
+      <p id="mensagemProduto" class="mensagem"></p>
+      <div class="acoes-dialogo">
+        <button id="botaoExcluir" class="botao perigo" type="button">Excluir</button>
+        <button id="botaoCancelar" class="botao secundario" type="button">Cancelar</button>
+        <button id="botaoSalvar" class="botao" type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module">
+    import {
+      firebaseLigado,
+      firebase,
+      documentoCatalogo,
+      lerListaInicial,
+      prepararUrlImagem
+    } from './js/catalogo.js';
+
+    const $ = id => document.getElementById(id);
+
+    let produtos = [];
+    let emEdicao = null;
+    let pararDeAcompanhar = null;
+
+    if (!firebaseLigado) {
+      $('semFirebase').hidden = false;
+    } else {
+      iniciar();
+    }
+
+    async function iniciar() {
+      const { auth, autenticacao } = await firebase();
+
+      auth.onAuthStateChanged(autenticacao, function(usuario) {
+        $('telaLogin').hidden = Boolean(usuario);
+        $('telaCadastro').hidden = !usuario;
+        $('botaoSair').hidden = !usuario;
+
+        if (usuario) {
+          acompanhar();
+        } else if (pararDeAcompanhar) {
+          pararDeAcompanhar();
+          pararDeAcompanhar = null;
+        }
+      });
+
+      $('formLogin').addEventListener('submit', async function(evento) {
+        evento.preventDefault();
+        $('mensagemLogin').textContent = '';
+
+        try {
+          await auth.signInWithEmailAndPassword(
+            autenticacao,
+            $('loginEmail').value.trim(),
+            $('loginSenha').value
+          );
+        } catch (erro) {
+          $('mensagemLogin').textContent = 'E-mail ou senha incorretos.';
+        }
+      });
+
+      $('botaoSair').addEventListener('click', function() {
+        auth.signOut(autenticacao);
+      });
+    }
+
+    async function acompanhar() {
+      const { firestore } = await firebase();
+
+      pararDeAcompanhar = firestore.onSnapshot(await documentoCatalogo(), function(documento) {
+        const dados = documento.data();
+        produtos = dados && Array.isArray(dados.lista) ? dados.lista : [];
+        $('avisoVazio').hidden = produtos.length > 0;
+        desenharTabela();
+      }, function(erro) {
+        $('resumo').className = 'mensagem erro';
+        $('resumo').textContent = 'Erro ao ler o catálogo: ' + erro.message;
+      });
+    }
+
+    // Grava a lista inteira de uma vez no documento catalogo/produtos
+    async function salvarLista(novaLista) {
+      const { firestore } = await firebase();
+
+      await firestore.setDoc(await documentoCatalogo(), {
+        lista: novaLista,
+        atualizadoEm: firestore.serverTimestamp()
+      });
+    }
+
+    function novoId() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    }
+
+    function normalizar(texto) {
+      return String(texto || '')
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase();
+    }
+
+    function desenharTabela() {
+      const busca = normalizar($('campoBusca').value.trim());
+      const corpo = $('corpoTabela');
+      corpo.innerHTML = '';
+
+      const visiveis = produtos
+        .filter(p => normalizar(p.codigo + ' ' + p.nome + ' ' + p.categoria).includes(busca))
+        .sort((a, b) => String(a.nome).localeCompare(String(b.nome), 'pt-BR'));
+
+      visiveis.forEach(function(produto) {
+        const linha = document.createElement('tr');
+
+        if (!produto.ativo) {
+          linha.className = 'inativo';
+        }
+
+        const foto = document.createElement('td');
+        const miniatura = document.createElement('div');
+        miniatura.className = 'miniatura';
+        const url = prepararUrlImagem(produto.imagem);
+
+        if (url) {
+          const imagem = document.createElement('img');
+          imagem.src = url;
+          imagem.loading = 'lazy';
+          imagem.referrerPolicy = 'no-referrer';
+          imagem.onerror = () => { miniatura.textContent = '📷'; };
+          miniatura.appendChild(imagem);
+        } else {
+          miniatura.textContent = '📷';
+        }
+
+        foto.appendChild(miniatura);
+
+        const codigo = document.createElement('td');
+        codigo.className = 'codigo';
+        codigo.textContent = produto.codigo || '—';
+
+        const nome = document.createElement('td');
+        nome.textContent = produto.nome;
+
+        const categoria = document.createElement('td');
+        categoria.className = 'col-categoria';
+        categoria.textContent = produto.categoria || '—';
+
+        const ativo = document.createElement('td');
+        ativo.textContent = produto.ativo ? 'Sim' : 'Não';
+
+        linha.append(foto, codigo, nome, categoria, ativo);
+        linha.addEventListener('click', () => abrirProduto(produto));
+        corpo.appendChild(linha);
+      });
+
+      const ativos = produtos.filter(p => p.ativo).length;
+      $('resumo').className = 'mensagem';
+      $('resumo').textContent =
+        produtos.length + ' produtos cadastrados, ' + ativos + ' aparecem no tablet' +
+        (busca ? ' · ' + visiveis.length + ' encontrados' : '');
+
+      const categorias = [...new Set(produtos.map(p => p.categoria).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, 'pt-BR'));
+      $('listaCategorias').innerHTML = '';
+      categorias.forEach(function(nomeCategoria) {
+        const opcao = document.createElement('option');
+        opcao.value = nomeCategoria;
+        $('listaCategorias').appendChild(opcao);
+      });
+    }
+
+    function abrirProduto(produto) {
+      emEdicao = produto;
+      $('tituloDialogo').textContent = produto ? 'Editar produto' : 'Novo produto';
+      $('campoCodigo').value = produto ? produto.codigo : '';
+      $('campoNome').value = produto ? produto.nome : '';
+      $('campoCategoria').value = produto ? produto.categoria : '';
+      $('campoImagem').value = produto ? produto.imagem : '';
+      $('campoAtivo').checked = produto ? Boolean(produto.ativo) : true;
+      $('botaoExcluir').hidden = !produto;
+      $('mensagemProduto').textContent = '';
+      $('dialogoProduto').showModal();
+    }
+
+    $('campoBusca').addEventListener('input', desenharTabela);
+    $('botaoNovo').addEventListener('click', () => abrirProduto(null));
+    $('botaoCancelar').addEventListener('click', () => $('dialogoProduto').close());
+
+    $('formProduto').addEventListener('submit', async function(evento) {
+      evento.preventDefault();
+
+      const dados = {
+        id: emEdicao ? emEdicao.id : novoId(),
+        codigo: $('campoCodigo').value.trim(),
+        nome: $('campoNome').value.trim(),
+        categoria: $('campoCategoria').value.trim().toUpperCase(),
+        imagem: $('campoImagem').value.trim(),
+        ativo: $('campoAtivo').checked
+      };
+
+      const novaLista = emEdicao
+        ? produtos.map(p => (p.id === emEdicao.id ? dados : p))
+        : [...produtos, dados];
+
+      await gravar(novaLista, 'Produto salvo.');
+    });
+
+    $('botaoExcluir').addEventListener('click', async function() {
+      if (!emEdicao || !confirm('Excluir "' + emEdicao.nome + '"? Se quiser só esconder do tablet, desmarque "Aparece no tablet".')) {
+        return;
+      }
+
+      await gravar(produtos.filter(p => p.id !== emEdicao.id), 'Produto excluído.');
+    });
+
+    async function gravar(novaLista, textoOk) {
+      const botao = $('botaoSalvar');
+      botao.disabled = true;
+
+      try {
+        await salvarLista(novaLista);
+        $('dialogoProduto').close();
+        $('resumo').className = 'mensagem ok';
+        $('resumo').textContent = textoOk;
+      } catch (erro) {
+        $('mensagemProduto').className = 'mensagem erro';
+        $('mensagemProduto').textContent = 'Não foi possível salvar: ' + erro.message;
+      } finally {
+        botao.disabled = false;
+      }
+    }
+
+    $('botaoImportar').addEventListener('click', async function() {
+      const botao = $('botaoImportar');
+      botao.disabled = true;
+
+      try {
+        const lista = await lerListaInicial();
+        await salvarLista(lista.map(p => ({ id: novoId(), ...p })));
+      } catch (erro) {
+        alert('Não foi possível importar: ' + erro.message);
+      } finally {
+        botao.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

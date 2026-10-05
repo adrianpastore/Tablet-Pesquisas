@@ -1,0 +1,1451 @@
+[
+ {
+  "codigo": "0011",
+  "nome": "AMANTEIGADOS",
+  "categoria": "BISCOITOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0563",
+  "nome": "BAGUETE RECHEADA CHESTER",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1DBrglLPjrwiUhF9Wy9oD4nEBPVJGOMIu/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0221",
+  "nome": "BAGUETE RECHEADA PRESUNTO",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1DBrglLPjrwiUhF9Wy9oD4nEBPVJGOMIu/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0561",
+  "nome": "BAGUETE RECHEADA SALAME",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1DBrglLPjrwiUhF9Wy9oD4nEBPVJGOMIu/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0173",
+  "nome": "BAURU PAULISTA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/10ICZr9gkcXiJVKI9RyHxNLl1Nm3lFJUF/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0560",
+  "nome": "BISCOITO GAJETINHA",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1Av3RVka4TtCR0a37JidsTTnWVJlwBe6F/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1722",
+  "nome": "BISCOITO GAJETINHA DOCE",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1lBDptFPcR0ygB-s7saI2bOzeyjwGPtb7/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0045",
+  "nome": "BISCOITO GOIABINHA",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1__efNdkT9N49ZbYMoDC2K1pmjledP7SO/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0040",
+  "nome": "BISCOITO ORIGINAL",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1ps17xEJzSx74hQvNF2SZrgniivNI-ZZj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0044",
+  "nome": "BISCOITO POLVILHO",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1_ECTce9nXZ5nDb3OTzf4JAcI6CyaunIR/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0043",
+  "nome": "BISCOITO SABOR BACON",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1ps17xEJzSx74hQvNF2SZrgniivNI-ZZj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0573",
+  "nome": "BISCOITO SABOR CEBOLA E SALSA",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1ps17xEJzSx74hQvNF2SZrgniivNI-ZZj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0918",
+  "nome": "BISCOITO SABOR CHURRASCO",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1ps17xEJzSx74hQvNF2SZrgniivNI-ZZj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1602",
+  "nome": "BISCOITO SABOR PIZZA",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1ps17xEJzSx74hQvNF2SZrgniivNI-ZZj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0579",
+  "nome": "BISCOITO TORCIDINHO",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1FPuBGvgbFsXx_Roqbr2aNks7oNEgEdnx/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0206",
+  "nome": "BOLACHINHA CHAMPAGNE",
+  "categoria": "BISCOITOS",
+  "imagem": "https://drive.google.com/file/d/1BskyAHO_-wSt60qmmbkCWpoO7swC8pxV/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0224",
+  "nome": "BOLINHA DE QUEIJO",
+  "categoria": "FRITOS",
+  "imagem": "https://drive.google.com/file/d/1Q6m4fa_BYOKdRSB5ThB-RqEiByezmIxk/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0602",
+  "nome": "BOLINHO DE BATATA CARNE MOIDA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1r9stE2ANAL2kx3Nw57s_TWoyfpG2c2NM/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0603",
+  "nome": "BOLINHO DE BATATA COM CARNE DE PANELA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1r9stE2ANAL2kx3Nw57s_TWoyfpG2c2NM/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0057",
+  "nome": "BOLO AIPIM",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1FBrEN61yCc56emmz0VDbBUsJL4ep0pXf/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0058",
+  "nome": "BOLO CHOCOLATE",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1lvLtsipt3Iu_hnfLB_RAK89M9Opl1aoS/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0521",
+  "nome": "Bolo de cenoura",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/18uPh1llLte5T3pRex5YfGV5kgElooBEB/view?usp=sharing",
+  "ativo": true
+ },
+ {
+  "codigo": "0546",
+  "nome": "BOLO DOCE DE LEITE",
+  "categoria": "BOLOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0070",
+  "nome": "Bolo Formigueiro",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1_1rcDzA0VwdRhifmLyJvfyMfUogA014V/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0060",
+  "nome": "BOLO FUBA C/ GOIABADA",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1FL5MnPqSSoorca5QlLxNl99uM_B0pL0q/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0590",
+  "nome": "BOLO INDIANO",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1pGX0YZs_VBMgBGE8F41Vt4wAtH775MIC/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0055",
+  "nome": "BOLO LARANJA",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1af2IJBDmQNgGY0VSPY6U1q6ox51q0eUR/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0389",
+  "nome": "BOLO LIMÃO",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1ewnwVdmxWVi2FO9oAW0ENyQymOGAe4dG/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0368",
+  "nome": "BOLO MULTICEREAIS BANANA",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1bpFlNpR0fyZismgLmvXByDHiBUSnrqkC/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0733",
+  "nome": "BOLO NEGA MALUCA",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1q7uX2q4gMDKxPS9Q0GwHY4ZmtspuCpFr/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0591",
+  "nome": "BOLO PAMONHA",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1BYl3YZcBJoSgPXjY3sqbc7LhFGXEhH_H/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0078",
+  "nome": "BOMBINHA CARAMELADA",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0079",
+  "nome": "BOMBINHA CHOCOLATE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0235",
+  "nome": "BOMBOCADO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0099",
+  "nome": "BRANQUINHO/NEGRINHO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0413",
+  "nome": "BREGERÊ",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0349",
+  "nome": "BROA CAXAMBU",
+  "categoria": "?",
+  "imagem": "https://drive.google.com/file/d/1u-IyBC-JO5QIa-LiddBgminTHycViipm/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0050",
+  "nome": "BROA DE MILHO",
+  "categoria": "?",
+  "imagem": "https://drive.google.com/file/d/1x45FZpy7nN478X65eic8vdYxcNd9T1b1/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0002",
+  "nome": "BROTINHO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0443",
+  "nome": "BROTINHO COM MAIONESE E QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0119",
+  "nome": "BROWNIE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0878",
+  "nome": "BRUSQUETA",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "8888",
+  "nome": "Caixa de Docinhos Sortidos 50 un.",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1-pyDhe4acTzy1TD31XSOfRKFEZmAvDe3/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0333",
+  "nome": "Caixa de Salgados Sortidos 100 un.",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1yFd08VTK9QRBNKgjfGbYWdV1Gh3TBKFh/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0444",
+  "nome": "Caixa de Salgados Sortidos 50 un.",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1I_Lel8tMoqH-8ViUI76patnuHkDtdyAx/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0780",
+  "nome": "Caixa de Sortidos Fritinhos 50 un.",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1K7g1QLxEZbYHjXYCXGnpUKcQxs8r4pSD/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0778",
+  "nome": "CAIXA DOGUINHOS SORTIDO 50UN",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1uR2tEqiwoJ5zFnfwl85-hu3uT6SsywOz/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0779",
+  "nome": "Caixa Sanduíches Sortida 50 un.",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1zA9z6w43GPpP2eIqz_T0cxeUuDDpWUPr/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0777",
+  "nome": "Caixa Sortida Vegetariana 50 un.",
+  "categoria": "CAIXA",
+  "imagem": "https://drive.google.com/file/d/1RfJDfF44htNelgjjDLdmnjXPtE-MFErV/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0505",
+  "nome": "CAKE DE PISTACHE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0117",
+  "nome": "CALZONE CARNE",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1r6I7dCF_yyhIHtLdG5bMCfwrHH88QrKN/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0117",
+  "nome": "CALZONE FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1r6I7dCF_yyhIHtLdG5bMCfwrHH88QrKN/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0117",
+  "nome": "CALZONE PRESUNTO E QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1r6I7dCF_yyhIHtLdG5bMCfwrHH88QrKN/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0251",
+  "nome": "CANUDINHO DE CARNE",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0029",
+  "nome": "CASADINHO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0183",
+  "nome": "CHIPA DE CALABRESA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1ZaMZtXTTrjZ0ej2v5JwqgwxftIFWDfWq/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0184",
+  "nome": "CHIPA DE GOIABADA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1ZaMZtXTTrjZ0ej2v5JwqgwxftIFWDfWq/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1969",
+  "nome": "CHIPIZZA",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0729",
+  "nome": "CIABATTA RECHEADA PEITO DE PERU",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/12xyBxebYF4mnv63eN1-14q102j3p6gL8/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0092",
+  "nome": "CIABATTA RECHEADA PRESUNTO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/12xyBxebYF4mnv63eN1-14q102j3p6gL8/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0728",
+  "nome": "CIABATTA RECHEADA ROYALE",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/12xyBxebYF4mnv63eN1-14q102j3p6gL8/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0482",
+  "nome": "COCADA BRANCA",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0482",
+  "nome": "COCADA PRETA",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0433",
+  "nome": "COXÃO DE FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1DgQ9XQgjgVD02AmKMLCfVHxi1KsnVg6r/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0969",
+  "nome": "COXÃO DE FRANGO COM CATUPIRY",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1DgQ9XQgjgVD02AmKMLCfVHxi1KsnVg6r/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0666",
+  "nome": "Coxinha de Frango KG",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0180",
+  "nome": "CROISSANT CHOCOLATE",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1krxdR53U3DUTRcuNAcEBKty13GH8MMvj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0180",
+  "nome": "CROISSANT DOCE DE LEITE",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1krxdR53U3DUTRcuNAcEBKty13GH8MMvj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0178",
+  "nome": "CROISSANT FRANGO",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1krxdR53U3DUTRcuNAcEBKty13GH8MMvj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0180",
+  "nome": "CROISSANT GOIABADA",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1krxdR53U3DUTRcuNAcEBKty13GH8MMvj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0178",
+  "nome": "CROISSANT QUEIJO E PRESUNTO",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1krxdR53U3DUTRcuNAcEBKty13GH8MMvj/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0257",
+  "nome": "CROQUETE",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0026",
+  "nome": "CUECA VIRADA",
+  "categoria": "DOCES FRITOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0483",
+  "nome": "CUPCAKE",
+  "categoria": "BOLOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0325",
+  "nome": "DONUTS",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0010",
+  "nome": "EMPADA FOLHADA CAMARÃO",
+  "categoria": "FOLHADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0215",
+  "nome": "EMPADA FOLHADA TROUXINHA FRANGO",
+  "categoria": "FOLHADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0391",
+  "nome": "EMPADA MASSA PODRE FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0391",
+  "nome": "EMPADA MASSA PODRE PALMITO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0022",
+  "nome": "ENROLADO DE SALSICHA",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0353",
+  "nome": "ESFIRRA ABERTA CALABRESA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16jtuwhfZ9QYFlsu792MPQuPk3uTFwgGi/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0353",
+  "nome": "ESFIRRA ABERTA CARNE",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16jtuwhfZ9QYFlsu792MPQuPk3uTFwgGi/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "2015",
+  "nome": "ESFIRRA ABERTA CARNE DE PANELA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16jtuwhfZ9QYFlsu792MPQuPk3uTFwgGi/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0353",
+  "nome": "ESFIRRA ABERTA FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16jtuwhfZ9QYFlsu792MPQuPk3uTFwgGi/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0353",
+  "nome": "ESFIRRA ABERTA QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16jtuwhfZ9QYFlsu792MPQuPk3uTFwgGi/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0031",
+  "nome": "ESFIRRA FECHADA CARNE",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0032",
+  "nome": "ESFIRRA FECHADA FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "falta cafés",
+  "categoria": "",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "falta cuca",
+  "categoria": "",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "falta empadas folhada grande",
+  "categoria": "",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "falta encomendas",
+  "categoria": "",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "falta frios",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "2011",
+  "nome": "HAMBURGUER CARNE DE PANELA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16COp0hE_qK5GvP8DPmsIBRoy-o-Zxv0u/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0425",
+  "nome": "HAMBURGUER GAUCHA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/16COp0hE_qK5GvP8DPmsIBRoy-o-Zxv0u/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1047",
+  "nome": "HOTDOG DE LINGUIÇA TOSCANA E VINAGRETE",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0206",
+  "nome": "LINGUA DE SOGRA DOCE DE LEITE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0207",
+  "nome": "LINGUA DE SOGRA FIOS DE OVOS",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0952",
+  "nome": "LINGUA DE SOGRA UN",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0235",
+  "nome": "MADELAINE GRANDE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0237",
+  "nome": "MADELAINE PEQUENO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0201",
+  "nome": "MASSA DE PIZZA",
+  "categoria": "",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0104",
+  "nome": "MERENGÃO RECHEADO DOCE DE LEITE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0105",
+  "nome": "MERENGÃO RECHEADO DOCE DE OVOS",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0314",
+  "nome": "MERENGUE RECHEADO DOCE DE LEITE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0315",
+  "nome": "MERENGUE RECHEADO DOCE DE OVOS",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0106",
+  "nome": "MERENGUINHO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0317",
+  "nome": "MIL FOLHAS",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0557",
+  "nome": "MINI BAURU PAULISTA",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "1106",
+  "nome": "MINI DONUTS",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0202",
+  "nome": "MINI PIZZA FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0202",
+  "nome": "MINI PIZZA PRESUNTO E QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0217",
+  "nome": "MINI SONHO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0269",
+  "nome": "MINIDOG",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0557",
+  "nome": "MINIDOG COM PIMENTÃO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0012",
+  "nome": "MOEDINHAS",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0210",
+  "nome": "MUFFINS",
+  "categoria": "BOLOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0242",
+  "nome": "NAPOLITANO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1KObct2l9Z1UKIALeYajGmEBgIshdovKO/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0382",
+  "nome": "NARIZ ENTUPIDO CREME",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0382",
+  "nome": "NARIZ ENTUPIDO DOCE DE LEITE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0029",
+  "nome": "OLHO DE BOI",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0029",
+  "nome": "OLHO DE BOI COM GELEIA DE MORANGO",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0039",
+  "nome": "PALITO DE QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1uleKrgw1O9iadf0rUVoR53ord_Aizt8x/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0446",
+  "nome": "PANCHO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1ONumZJPqeaiva4rJ02YkfET12TZvCdAx/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0350",
+  "nome": "PANQUECA CARNE DE MOIDA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1V8nICq1mSCg82oUNvieIbfaQW0OaJ90f/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1985",
+  "nome": "PANQUECA CARNE DE PANELA",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1V8nICq1mSCg82oUNvieIbfaQW0OaJ90f/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0615",
+  "nome": "PANQUECA FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1V8nICq1mSCg82oUNvieIbfaQW0OaJ90f/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0165",
+  "nome": "PÃO BAGUETE ITALIANA",
+  "categoria": "PÃES",
+  "imagem": "https://drive.google.com/file/d/1WbdgpwUjKvrwjkNKDJL9ns-21fty-zB5/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0408",
+  "nome": "PÃO BAGUETINHA",
+  "categoria": "PÃES",
+  "imagem": "https://drive.google.com/file/d/1M9bBI3vJ9F6OenGt7RuxSsBlrV1JOwqQ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0003",
+  "nome": "PÃO BROTINHO COMPRIDO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0003",
+  "nome": "PÃO BROTINHO REDONDO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0156",
+  "nome": "PÃO C/ FRIOS",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0172",
+  "nome": "PÃO C/ TORRESMO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0175",
+  "nome": "PÃO CACETINHO BABY",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0170",
+  "nome": "PÃO CACHORRO QUENTE",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0051",
+  "nome": "PÃO CASEIRO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0197",
+  "nome": "PÃO CENTEIO LIGHT",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "1897",
+  "nome": "PÃO CHIA LIGHT",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0504",
+  "nome": "PÃO CIABATTA",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0091",
+  "nome": "PÃO CIABATTA GRAOS",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "1579",
+  "nome": "PÃO DE ALHO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "1017",
+  "nome": "PÃO DE FIGO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0186",
+  "nome": "PÃO DE FORMA",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0195",
+  "nome": "PÃO DE FORMA 12 GRÃOS",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "PÃO DE HAMBURGER",
+  "categoria": "PÃES",
+  "imagem": "https://drive.google.com/file/d/1XZeAMjj--V78q64k9hovJzx66bDZaa4s/view?usp=drive_link",
+  "ativo": false
+ },
+ {
+  "codigo": "0171",
+  "nome": "PÃO DE LEITE",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0181",
+  "nome": "PÃO DE QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1tj4NxiY6uQS1bh8_g8wG7VAYvtqOCXyu/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1862",
+  "nome": "PÃO DE QUEIJO PARMESÃO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1tj4NxiY6uQS1bh8_g8wG7VAYvtqOCXyu/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0014",
+  "nome": "PÃO DOCE",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0752",
+  "nome": "PÃO DOCE C/ GOTAS DE CHOCOLATE",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0001",
+  "nome": "PÃO FRANCÊS",
+  "categoria": "PÃES",
+  "imagem": "https://drive.google.com/file/d/1_UomPrbqTkC5a6mD8WF-EG1o8W3uQpd0/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0164",
+  "nome": "PÃO FRANCÊS FOLHADO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0331",
+  "nome": "PÃO FRANCÊS INTEGRAL",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0416",
+  "nome": "PÃO GAJETA",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0165",
+  "nome": "PÃO ITALIANO REDONDO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0619",
+  "nome": "PAO LEITE NINHO RECHEADO",
+  "categoria": "",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0551",
+  "nome": "PÃO LONGA FERMENTAÇÃO BRANCA",
+  "categoria": "PÃES",
+  "imagem": "https://drive.google.com/file/d/1TjM-CCEzZ-iS7lDKVQzyjCX1cuDyDTX3/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0552",
+  "nome": "PÃO LONGA FERMENTAÇÃO GRÃOS",
+  "categoria": "PÃES",
+  "imagem": "https://drive.google.com/file/d/1TjM-CCEzZ-iS7lDKVQzyjCX1cuDyDTX3/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1017",
+  "nome": "PÃO NOZES C/ DAMASCO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0220",
+  "nome": "PÃO PARTICULAR",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0196",
+  "nome": "PÃO PRETO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0167",
+  "nome": "PÃO SOVADO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0751",
+  "nome": "PÃO SOVADO MINEIRO",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0195",
+  "nome": "PÃOZINHO BABY MULTIGRÃOS",
+  "categoria": "PÃES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0427",
+  "nome": "PASTEL FOLHADO ABERTO",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1-O_ujC5oythznnF5avXqAd4XmXQrejoH/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "PASTEL FOLHADO FECHADO",
+  "categoria": "FOLHADOS",
+  "imagem": "https://drive.google.com/file/d/1xzN3Sig8qiYRUGMGSmuDKIvqbwnY6ddr/view?usp=drive_link",
+  "ativo": false
+ },
+ {
+  "codigo": "1983",
+  "nome": "PASTEL FRITO CARNE DE PANELA",
+  "categoria": "FRITOS",
+  "imagem": "https://drive.google.com/file/d/18td-8-eSoL9R4u7UHqbNvxzAagwVcKLS/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0021",
+  "nome": "PASTEL FRITO CARNE MOIDA",
+  "categoria": "FRITOS",
+  "imagem": "https://drive.google.com/file/d/18td-8-eSoL9R4u7UHqbNvxzAagwVcKLS/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0021",
+  "nome": "PASTEL FRITO FRANGO",
+  "categoria": "FRITOS",
+  "imagem": "https://drive.google.com/file/d/18td-8-eSoL9R4u7UHqbNvxzAagwVcKLS/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0020",
+  "nome": "PASTELZINHO",
+  "categoria": "FRITOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0007",
+  "nome": "PIZZA DE SARDINHA",
+  "categoria": "PIZZA",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0664",
+  "nome": "PIZZA EM FATIAS",
+  "categoria": "PIZZA",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "8664",
+  "nome": "PIZZA FERMENTAÇÃO NATURAL",
+  "categoria": "PIZZA",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "2009",
+  "nome": "PIZZA PÃO",
+  "categoria": "PIZZA",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0739",
+  "nome": "PUDIM COCADA",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0235",
+  "nome": "QUEIJADINHA GRANDE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "2056",
+  "nome": "QUEIJADINHA PEQUENA",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0054",
+  "nome": "QUEQUE",
+  "categoria": "BOLOS",
+  "imagem": "https://drive.google.com/file/d/1Ih2TiE6ruZnTOQSSlGyNvwCl8GPNLIS7/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0411",
+  "nome": "QUICHE",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1_H7aoZjFXBS6k7xJeQ-CzJD0UhbNzCxx/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1942",
+  "nome": "QUICHE DE CAMARÃO",
+  "categoria": "SALGADOS",
+  "imagem": "https://drive.google.com/file/d/1_H7aoZjFXBS6k7xJeQ-CzJD0UhbNzCxx/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0322",
+  "nome": "RECHEADA BABY",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1F8F-GbZ_rrXY888FH7731m-k07i8zuAJ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1988",
+  "nome": "RECHEADA COM OVO",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1F8F-GbZ_rrXY888FH7731m-k07i8zuAJ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0128",
+  "nome": "RECHEADA DE BOLONHA",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1F8F-GbZ_rrXY888FH7731m-k07i8zuAJ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "2057",
+  "nome": "RECHEADA DE ROYALE",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1F8F-GbZ_rrXY888FH7731m-k07i8zuAJ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0125",
+  "nome": "RECHEADA DE SALAME",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1F8F-GbZ_rrXY888FH7731m-k07i8zuAJ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "1874",
+  "nome": "RECHEADA DUPLA",
+  "categoria": "RECHEADAS",
+  "imagem": "https://drive.google.com/file/d/1F8F-GbZ_rrXY888FH7731m-k07i8zuAJ/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0438",
+  "nome": "RECHEADA PRENSADA",
+  "categoria": "RECHEADAS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0666",
+  "nome": "RISOLES DE FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0666",
+  "nome": "RISOLES PRESUNTO E QUEIJO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0455",
+  "nome": "ROCAMBOLE DE MORANGO",
+  "categoria": "TORTAS",
+  "imagem": "https://drive.google.com/file/d/1egqEUyB8IzBGvFbaX_IR-FsNs-x27c4f/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0134",
+  "nome": "ROCAMBOLE GLACEADO",
+  "categoria": "TORTAS",
+  "imagem": "https://drive.google.com/file/d/1egqEUyB8IzBGvFbaX_IR-FsNs-x27c4f/view?usp=drive_link",
+  "ativo": true
+ },
+ {
+  "codigo": "0037",
+  "nome": "SONHO DE CREME",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0037",
+  "nome": "SONHO DOCE DE LEITE",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0036",
+  "nome": "SONHO GOIABADA",
+  "categoria": "DOCES",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0234",
+  "nome": "TIGELINHA DE FRANGO",
+  "categoria": "SALGADOS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0146",
+  "nome": "TORTA DE BRIGADEIRO COM BOMBOM",
+  "categoria": "TORTAS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0150",
+  "nome": "TORTA DE MORANGO",
+  "categoria": "TORTAS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0771",
+  "nome": "TORTA FATIA MONOPORCAO UN",
+  "categoria": "TORTAS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "0608",
+  "nome": "TORTA SENSAÇÃO",
+  "categoria": "TORTAS",
+  "imagem": "",
+  "ativo": true
+ },
+ {
+  "codigo": "",
+  "nome": "QUEIJO MUSSARELA",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "PRESUNTO SADIA",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "SALAME",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "PRESUNTO ROYALE",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "PRESUNTO MIGNON",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "QUEIJO LANCHE",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "CERATTIS?",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "MORTADELA OURO/DEFUMADA",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ },
+ {
+  "codigo": "",
+  "nome": "MORTADELA COMUM",
+  "categoria": "",
+  "imagem": "",
+  "ativo": false
+ }
+]

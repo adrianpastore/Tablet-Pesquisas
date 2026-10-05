@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// Regras do Firestore. Cole no console do Firebase em Firestore > Regras.
+// Qualquer um pode ler a lista (o tablet não faz login).
+// Só a conta do cadastro pode alterar: troque COLE_AQUI_O_UID pelo UID dela,
+// que aparece em Authentication > Usuários.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /catalogo/produtos {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.auth.uid == 'COLE_AQUI_O_UID';
+    }
+  }
+}
