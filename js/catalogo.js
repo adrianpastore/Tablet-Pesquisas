@@ -67,14 +67,45 @@ export async function acompanharCatalogo(aoMudar, aoFalhar) {
 
   const { firestore } = await firebase();
   const referencia = await documentoCatalogo();
+  let jaRecebeu = false;
+
+  // Se o Firebase demorar a responder, mostra a lista da planilha enquanto isso
+  const espera = setTimeout(async function() {
+    if (!jaRecebeu) {
+      try {
+        aoMudar(await lerListaInicial());
+      } catch (erro) {
+        aoFalhar(erro);
+      }
+    }
+  }, 8000);
 
   return firestore.onSnapshot(
     referencia,
-    function(documento) {
-      const dados = documento.data();
-      aoMudar(dados && Array.isArray(dados.lista) ? dados.lista : []);
+    async function(documento) {
+      clearTimeout(espera);
+
+      try {
+        aoMudar(await listaDoDocumento(documento));
+        jaRecebeu = true;
+      } catch (erro) {
+        aoFalhar(erro);
+      }
     },
-    aoFalhar
+    async function(erro) {
+      clearTimeout(espera);
+      aoFalhar(erro);
+
+      // Se o Firebase nunca respondeu (banco ainda não criado, por exemplo),
+      // mostra pelo menos a lista da planilha
+      if (!jaRecebeu) {
+        try {
+          aoMudar(await lerListaInicial());
+        } catch (erroLista) {
+          // Fica com o erro já exibido
+        }
+      }
+    }
   );
 }
 
@@ -85,9 +116,18 @@ export async function buscarCatalogo() {
   }
 
   const { firestore } = await firebase();
-  const documento = await firestore.getDocFromServer(await documentoCatalogo());
+  return listaDoDocumento(await firestore.getDocFromServer(await documentoCatalogo()));
+}
+
+// Enquanto a lista ainda não foi importada no Firebase, usa a da planilha
+async function listaDoDocumento(documento) {
   const dados = documento.data();
-  return dados && Array.isArray(dados.lista) ? dados.lista : [];
+
+  if (!dados || !Array.isArray(dados.lista)) {
+    return lerListaInicial();
+  }
+
+  return dados.lista;
 }
 
 export function prepararUrlImagem(url) {
