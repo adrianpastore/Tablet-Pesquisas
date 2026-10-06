@@ -306,6 +306,13 @@
       font-weight: bold;
     }
 
+    .venda-produto {
+      display: block;
+      margin-top: 5px;
+      color: var(--principal-escuro);
+      font-size: 18px;
+    }
+
     .codigo-produto {
       border-radius: 13px;
       padding: 13px 10px;
@@ -488,6 +495,13 @@
   font-family: Georgia, serif;
   font-size: clamp(28px, 5vw, 43px);
   line-height: 1.1;
+}
+
+.modal-venda {
+  margin: -12px 0 24px;
+  color: var(--principal-escuro);
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: bold;
 }
 
 .modal-conteudo > span {
@@ -821,6 +835,7 @@
 </div>
 
 <h2 id="modalNomeProduto"></h2>
+<div id="modalVenda" class="modal-venda" hidden></div>
 
     <span>CÓDIGO</span>
 
@@ -841,6 +856,7 @@
     import {
       acompanharCatalogo,
       buscarCatalogo,
+      enderecoDaImagem,
       produtosParaExibir
     } from './js/catalogo.js';
 
@@ -1012,6 +1028,10 @@
 
       document.getElementById('botaoLimpar').hidden = !campo.value;
 
+      // Cada palavra vale sozinha, em qualquer ordem:
+      // "coxinha frango" acha "Coxinha de Frango KG"
+      const palavras = pesquisa.split(/\s+/).filter(Boolean);
+
       const produtosFiltrados = todosProdutos.filter(function(produto) {
         const pertenceCategoria =
           categoriaSelecionada === 'Todos' ||
@@ -1021,16 +1041,28 @@
           produto.nome + ' ' + produto.codigo
         );
 
-        return pertenceCategoria && textoProduto.includes(pesquisa);
+        return pertenceCategoria && palavras.every(function(palavra) {
+          return textoProduto.includes(palavra);
+        });
       });
 
       document.getElementById('quantidadeProdutos').textContent =
         produtosFiltrados.length;
 
-      exibirProdutos(produtosFiltrados);
+      exibirProdutos(produtosFiltrados, codigoDigitado(pesquisa));
     }
 
-    function exibirProdutos(produtos) {
+    // Se a pesquisa for só um número, devolve ele sem zeros à esquerda
+    // ("563" e "0563" valem o mesmo)
+    function codigoDigitado(pesquisa) {
+      return /^\d+$/.test(pesquisa) ? semZerosAEsquerda(pesquisa) : '';
+    }
+
+    function semZerosAEsquerda(codigo) {
+      return codigo.replace(/^0+(?=\d)/, '');
+    }
+
+    function exibirProdutos(produtos, codigo) {
       const conteudo = document.getElementById('conteudo');
       conteudo.innerHTML = '';
 
@@ -1053,6 +1085,20 @@
         estado.append(titulo, texto, botao);
         conteudo.appendChild(estado);
         return;
+      }
+
+      // Quem tem exatamente o código digitado aparece primeiro
+      if (codigo) {
+        const exatos = produtos.filter(function(produto) {
+          return semZerosAEsquerda(produto.codigo) === codigo;
+        });
+
+        if (exatos.length > 0) {
+          conteudo.appendChild(
+            criarSecaoCategoria('Código ' + exatos[0].codigo, exatos)
+          );
+          produtos = produtos.filter(produto => !exatos.includes(produto));
+        }
       }
 
       const grupos = {};
@@ -1139,16 +1185,27 @@
 
       if (produto.imagem) {
         const imagem = document.createElement('img');
-        imagem.src = produto.imagem;
         imagem.alt = produto.nome;
         imagem.loading = 'lazy';
         imagem.referrerPolicy = 'no-referrer';
-
         imagem.onerror = function() {
           areaImagem.innerHTML = '📷';
         };
 
         areaImagem.appendChild(imagem);
+
+        enderecoDaImagem(produto.imagem).then(
+          function(endereco) {
+            if (endereco) {
+              imagem.src = endereco;
+            } else {
+              areaImagem.innerHTML = '📷';
+            }
+          },
+          function() {
+            areaImagem.innerHTML = '📷';
+          }
+        );
       } else {
         areaImagem.textContent = '📷';
       }
@@ -1156,6 +1213,13 @@
       const nome = document.createElement('div');
       nome.className = 'nome-produto';
       nome.textContent = produto.nome;
+
+      if (produto.venda) {
+        const venda = document.createElement('span');
+        venda.className = 'venda-produto';
+        venda.textContent = produto.venda;
+        nome.appendChild(venda);
+      }
 
       const codigo = document.createElement('div');
       codigo.className = 'codigo-produto';
@@ -1184,6 +1248,9 @@
       const imagemPadrao = document.getElementById('modalImagemPadrao');
 
       document.getElementById('modalNomeProduto').textContent = produto.nome;
+      const modalVenda = document.getElementById('modalVenda');
+      modalVenda.textContent = produto.venda;
+      modalVenda.hidden = !produto.venda;
       document.getElementById('modalNumeroCodigo').textContent = produto.codigo;
 
       imagemPopup.onload = null;

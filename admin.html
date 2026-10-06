@@ -149,6 +149,66 @@
       margin-top: 0;
     }
 
+    dialog select {
+      display: block;
+      width: 100%;
+      min-height: 46px;
+      margin-top: 5px;
+      border: 2px solid var(--borda);
+      border-radius: 12px;
+      padding: 0 10px;
+      background: var(--branco);
+      color: var(--texto);
+      font-size: 16px;
+    }
+
+    .barra select {
+      min-height: 46px;
+      border: 2px solid var(--borda);
+      border-radius: 12px;
+      padding: 0 10px;
+      background: var(--branco);
+      color: var(--texto);
+      font-size: 16px;
+    }
+
+    .aviso-repetido {
+      margin-left: 4px;
+      cursor: help;
+    }
+
+    .foto-produto {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .previa-foto {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 96px;
+      height: 96px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #f1ebe4;
+      font-size: 30px;
+    }
+
+    .previa-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .foto-acoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .mensagem {
       min-height: 20px;
       margin: 10px 0 0;
@@ -324,6 +384,11 @@
       <div class="cartao">
         <div class="barra">
           <input id="campoBusca" type="search" placeholder="Buscar por nome, código ou categoria" autocomplete="off">
+          <select id="filtro" aria-label="Mostrar">
+            <option value="todos">Todos</option>
+            <option value="semFoto">Sem foto</option>
+            <option value="repetido">Código repetido</option>
+          </select>
           <button id="botaoNovo" class="botao" type="button">+ Novo produto</button>
         </div>
         <p id="resumo" class="mensagem"></p>
@@ -334,6 +399,7 @@
               <th>Código</th>
               <th>Nome</th>
               <th class="col-categoria">Categoria</th>
+              <th>Preço</th>
               <th>Ativo</th>
             </tr>
           </thead>
@@ -358,8 +424,28 @@
         <input id="campoCategoria" type="text" list="listaCategorias">
         <datalist id="listaCategorias"></datalist>
       </label>
-      <label>Link da foto (Google Drive ou endereço de imagem)
-        <input id="campoImagem" type="url">
+      <div class="grade">
+        <label>Vendido por
+          <select id="campoVenda">
+            <option value="">Não informar</option>
+            <option value="UN">Unidade</option>
+            <option value="KG">KG</option>
+          </select>
+        </label>
+        <label>Preço (R$)
+          <input id="campoPreco" type="text" inputmode="decimal" placeholder="Ex.: 12,90" autocomplete="off">
+        </label>
+      </div>
+      <div class="foto-produto">
+        <div id="previaFoto" class="previa-foto">📷</div>
+        <div class="foto-acoes">
+          <button id="botaoTirarFoto" class="botao" type="button">📷 Tirar ou escolher foto</button>
+          <button id="botaoRemoverFoto" class="botao secundario" type="button">Remover foto</button>
+        </div>
+        <input id="arquivoFoto" type="file" accept="image/*" hidden>
+      </div>
+      <label>Ou link da foto (Google Drive ou endereço de imagem)
+        <input id="campoImagem" type="url" placeholder="Opcional">
       </label>
       <label class="ativo">
         <input id="campoAtivo" type="checkbox"> Aparece no tablet
@@ -378,8 +464,13 @@
       firebaseLigado,
       firebase,
       documentoCatalogo,
+      documentoFoto,
+      enderecoDaImagem,
       lerListaInicial,
-      prepararUrlImagem
+      lerPreco,
+      formatarPreco,
+      textoVenda,
+      PREFIXO_FOTO
     } from './js/catalogo.js';
 
     const $ = id => document.getElementById(id);
@@ -387,6 +478,14 @@
     let produtos = [];
     let emEdicao = null;
     let pararDeAcompanhar = null;
+
+    // Foto do produto aberto: a que já estava salva e a recém-tirada (ainda não enviada)
+    let imagemSalva = '';
+    let fotoNova = null;
+
+    // Maior lado da foto, em pixels. Mantém cada foto bem abaixo do limite
+    // de 1 MB por documento do Firestore.
+    const LADO_MAXIMO_FOTO = 800;
 
     if (!firebaseLigado) {
       $('semFirebase').hidden = false;
@@ -465,14 +564,44 @@
         .toLowerCase();
     }
 
+    // "563" e "0563" contam como o mesmo código
+    function chaveCodigo(codigo) {
+      return String(codigo || '').trim().replace(/^0+(?=\d)/, '');
+    }
+
+    function contarCodigos(lista) {
+      const contagem = new Map();
+
+      lista.forEach(function(produto) {
+        const chave = chaveCodigo(produto.codigo);
+
+        if (chave) {
+          contagem.set(chave, (contagem.get(chave) || 0) + 1);
+        }
+      });
+
+      return contagem;
+    }
+
     function desenharTabela() {
       const busca = normalizar($('campoBusca').value.trim());
+      const palavras = busca.split(/\s+/).filter(Boolean);
+      const filtro = $('filtro').value;
+      const contagemCodigos = contarCodigos(produtos);
+      const repetido = p => (contagemCodigos.get(chaveCodigo(p.codigo)) || 0) > 1;
       const corpo = $('corpoTabela');
       corpo.innerHTML = '';
 
       const visiveis = produtos
-        .filter(p => normalizar(p.codigo + ' ' + p.nome + ' ' + p.categoria).includes(busca))
-        .sort((a, b) => String(a.nome).localeCompare(String(b.nome), 'pt-BR'));
+        .filter(function(p) {
+          const texto = normalizar(p.codigo + ' ' + p.nome + ' ' + p.categoria);
+          return palavras.every(palavra => texto.includes(palavra)) &&
+            (filtro !== 'semFoto' || !String(p.imagem || '').trim()) &&
+            (filtro !== 'repetido' || repetido(p));
+        })
+        .sort(filtro === 'repetido'
+          ? (a, b) => chaveCodigo(a.codigo).localeCompare(chaveCodigo(b.codigo), 'pt-BR', { numeric: true })
+          : (a, b) => String(a.nome).localeCompare(String(b.nome), 'pt-BR'));
 
       visiveis.forEach(function(produto) {
         const linha = document.createElement('tr');
@@ -484,24 +613,21 @@
         const foto = document.createElement('td');
         const miniatura = document.createElement('div');
         miniatura.className = 'miniatura';
-        const url = prepararUrlImagem(produto.imagem);
-
-        if (url) {
-          const imagem = document.createElement('img');
-          imagem.src = url;
-          imagem.loading = 'lazy';
-          imagem.referrerPolicy = 'no-referrer';
-          imagem.onerror = () => { miniatura.textContent = '📷'; };
-          miniatura.appendChild(imagem);
-        } else {
-          miniatura.textContent = '📷';
-        }
+        mostrarImagem(miniatura, produto.imagem);
 
         foto.appendChild(miniatura);
 
         const codigo = document.createElement('td');
         codigo.className = 'codigo';
         codigo.textContent = produto.codigo || '—';
+
+        if (repetido(produto)) {
+          const aviso = document.createElement('span');
+          aviso.className = 'aviso-repetido';
+          aviso.textContent = '⚠';
+          aviso.title = 'Outro produto usa o mesmo código';
+          codigo.appendChild(aviso);
+        }
 
         const nome = document.createElement('td');
         nome.textContent = produto.nome;
@@ -510,19 +636,25 @@
         categoria.className = 'col-categoria';
         categoria.textContent = produto.categoria || '—';
 
+        const venda = document.createElement('td');
+        venda.textContent = textoVenda(produto) || '—';
+
         const ativo = document.createElement('td');
         ativo.textContent = produto.ativo ? 'Sim' : 'Não';
 
-        linha.append(foto, codigo, nome, categoria, ativo);
+        linha.append(foto, codigo, nome, categoria, venda, ativo);
         linha.addEventListener('click', () => abrirProduto(produto));
         corpo.appendChild(linha);
       });
 
       const ativos = produtos.filter(p => p.ativo).length;
+      const semFoto = produtos.filter(p => !String(p.imagem || '').trim()).length;
+      const comCodigoRepetido = produtos.filter(repetido).length;
       $('resumo').className = 'mensagem';
       $('resumo').textContent =
-        produtos.length + ' produtos cadastrados, ' + ativos + ' aparecem no tablet' +
-        (busca ? ' · ' + visiveis.length + ' encontrados' : '');
+        produtos.length + ' produtos cadastrados, ' + ativos + ' aparecem no tablet · ' +
+        semFoto + ' sem foto · ' + comCodigoRepetido + ' com código repetido' +
+        (busca || filtro !== 'todos' ? ' · ' + visiveis.length + ' na lista' : '');
 
       const categorias = [...new Set(produtos.map(p => p.categoria).filter(Boolean))]
         .sort((a, b) => a.localeCompare(b, 'pt-BR'));
@@ -540,14 +672,172 @@
       $('campoCodigo').value = produto ? produto.codigo : '';
       $('campoNome').value = produto ? produto.nome : '';
       $('campoCategoria').value = produto ? produto.categoria : '';
-      $('campoImagem').value = produto ? produto.imagem : '';
+      $('campoVenda').value = produto && produto.venda ? produto.venda : '';
+      $('campoPreco').value = produto && typeof produto.preco === 'number'
+        ? formatarPreco(produto.preco).replace(/R\$\s*/, '')
+        : '';
+      imagemSalva = produto ? String(produto.imagem || '').trim() : '';
+      fotoNova = null;
+      $('campoImagem').value = imagemSalva.startsWith(PREFIXO_FOTO) ? '' : imagemSalva;
+      $('arquivoFoto').value = '';
+      atualizarPrevia();
       $('campoAtivo').checked = produto ? Boolean(produto.ativo) : true;
       $('botaoExcluir').hidden = !produto;
       $('mensagemProduto').textContent = '';
       $('dialogoProduto').showModal();
     }
 
+    // Mostra uma foto (link do Drive ou foto do cadastro) dentro de um quadrinho
+    function mostrarImagem(quadro, valor) {
+      quadro.textContent = '📷';
+      quadro.dataset.valor = valor || '';
+
+      if (!valor) {
+        return;
+      }
+
+      enderecoDaImagem(valor).then(function(endereco) {
+        // O quadro pode ter mudado de foto enquanto esta carregava
+        if (!endereco || quadro.dataset.valor !== valor) {
+          return;
+        }
+
+        const imagem = document.createElement('img');
+        imagem.referrerPolicy = 'no-referrer';
+        imagem.onerror = () => { quadro.textContent = '📷'; };
+        imagem.src = endereco;
+        quadro.textContent = '';
+        quadro.appendChild(imagem);
+      }, function() {});
+    }
+
+    function imagemEscolhida() {
+      if (fotoNova) {
+        return fotoNova;
+      }
+
+      const link = $('campoImagem').value.trim();
+
+      if (link) {
+        return link;
+      }
+
+      return imagemSalva.startsWith(PREFIXO_FOTO) ? imagemSalva : '';
+    }
+
+    function atualizarPrevia() {
+      const valor = imagemEscolhida();
+      mostrarImagem($('previaFoto'), valor);
+      $('botaoRemoverFoto').hidden = !valor;
+    }
+
+    // Diminui a foto da câmera e devolve um JPEG em texto (data URL)
+    async function reduzirFoto(arquivo) {
+      const imagem = await abrirImagem(arquivo);
+      const largura = imagem.width;
+      const altura = imagem.height;
+      const escala = Math.min(1, LADO_MAXIMO_FOTO / Math.max(largura, altura));
+      const tela = document.createElement('canvas');
+      tela.width = Math.round(largura * escala);
+      tela.height = Math.round(altura * escala);
+      tela.getContext('2d').drawImage(imagem, 0, 0, tela.width, tela.height);
+
+      let resultado = '';
+
+      for (const qualidade of [0.82, 0.7, 0.55, 0.4]) {
+        resultado = tela.toDataURL('image/jpeg', qualidade);
+
+        if (resultado.length < 600000) {
+          break;
+        }
+      }
+
+      return resultado;
+    }
+
+    async function abrirImagem(arquivo) {
+      if (window.createImageBitmap) {
+        try {
+          // Já respeita a rotação da foto (celular em pé ou deitado)
+          return await createImageBitmap(arquivo, { imageOrientation: 'from-image' });
+        } catch (erro) {
+          // Tenta do jeito antigo abaixo
+        }
+      }
+
+      const endereco = URL.createObjectURL(arquivo);
+
+      try {
+        const imagem = new Image();
+        imagem.src = endereco;
+        await imagem.decode();
+        return imagem;
+      } finally {
+        URL.revokeObjectURL(endereco);
+      }
+    }
+
+    // Apaga do Firestore as fotos do cadastro que nenhum produto usa mais
+    async function apagarFotosSemUso(listaAntiga, listaNova) {
+      const emUso = new Set(listaNova.map(p => p.imagem));
+      const sobrando = new Set(
+        listaAntiga
+          .map(p => String(p.imagem || ''))
+          .filter(valor => valor.startsWith(PREFIXO_FOTO) && !emUso.has(valor))
+      );
+
+      if (sobrando.size === 0) {
+        return;
+      }
+
+      const { firestore, db } = await firebase();
+
+      for (const valor of sobrando) {
+        firestore.deleteDoc(documentoFoto(firestore, db, valor.slice(PREFIXO_FOTO.length)))
+          .catch(() => {});
+      }
+    }
+
+    $('botaoTirarFoto').addEventListener('click', () => $('arquivoFoto').click());
+
+    $('arquivoFoto').addEventListener('change', async function() {
+      const arquivo = $('arquivoFoto').files[0];
+
+      if (!arquivo) {
+        return;
+      }
+
+      $('mensagemProduto').className = 'mensagem';
+      $('mensagemProduto').textContent = 'Preparando a foto...';
+
+      try {
+        fotoNova = await reduzirFoto(arquivo);
+        $('campoImagem').value = '';
+        $('mensagemProduto').textContent = '';
+        atualizarPrevia();
+      } catch (erro) {
+        $('mensagemProduto').className = 'mensagem erro';
+        $('mensagemProduto').textContent = 'Não foi possível abrir esta foto.';
+      }
+    });
+
+    $('botaoRemoverFoto').addEventListener('click', function() {
+      fotoNova = null;
+      imagemSalva = '';
+      $('campoImagem').value = '';
+      $('arquivoFoto').value = '';
+      atualizarPrevia();
+    });
+
+    $('campoImagem').addEventListener('input', function() {
+      if ($('campoImagem').value.trim()) {
+        fotoNova = null;
+      }
+      atualizarPrevia();
+    });
+
     $('campoBusca').addEventListener('input', desenharTabela);
+    $('filtro').addEventListener('change', desenharTabela);
     $('botaoNovo').addEventListener('click', () => abrirProduto(null));
     $('botaoCancelar').addEventListener('click', () => $('dialogoProduto').close());
 
@@ -559,15 +849,70 @@
         codigo: $('campoCodigo').value.trim(),
         nome: $('campoNome').value.trim(),
         categoria: $('campoCategoria').value.trim().toUpperCase(),
-        imagem: $('campoImagem').value.trim(),
+        imagem: imagemEscolhida(),
+        venda: $('campoVenda').value,
+        preco: lerPreco($('campoPreco').value),
         ativo: $('campoAtivo').checked
       };
 
-      const novaLista = emEdicao
-        ? produtos.map(p => (p.id === emEdicao.id ? dados : p))
-        : [...produtos, dados];
+      if (Number.isNaN(dados.preco)) {
+        $('mensagemProduto').className = 'mensagem erro';
+        $('mensagemProduto').textContent = 'Preço inválido. Use só números, como 12,90.';
+        $('campoPreco').focus();
+        return;
+      }
 
-      await gravar(novaLista, 'Produto salvo.');
+      const outrosComMesmoCodigo = produtos.filter(
+        p => p.id !== dados.id && chaveCodigo(p.codigo) === chaveCodigo(dados.codigo)
+      );
+
+      if (outrosComMesmoCodigo.length > 0 && !confirm(
+        'O código ' + dados.codigo + ' já é usado por:\n\n' +
+        outrosComMesmoCodigo.map(p => '• ' + p.nome).join('\n') +
+        '\n\nSalvar mesmo assim?'
+      )) {
+        return;
+      }
+
+      const botao = $('botaoSalvar');
+      botao.disabled = true;
+
+      try {
+        if (fotoNova) {
+          $('mensagemProduto').className = 'mensagem';
+          $('mensagemProduto').textContent = 'Enviando a foto...';
+
+          const idFoto = novoId();
+          const { firestore, db } = await firebase();
+
+          try {
+            await firestore.setDoc(documentoFoto(firestore, db, idFoto), {
+              dados: fotoNova,
+              criadoEm: firestore.serverTimestamp()
+            });
+          } catch (erro) {
+            $('mensagemProduto').className = 'mensagem erro';
+            $('mensagemProduto').textContent = erro.code === 'permission-denied'
+              ? 'O Firebase recusou a foto. As regras do Firestore precisam ser atualizadas (arquivo firestore.rules).'
+              : 'Não foi possível enviar a foto: ' + erro.message;
+            return;
+          }
+
+          dados.imagem = PREFIXO_FOTO + idFoto;
+          fotoNova = null;
+        }
+
+        const listaAntiga = produtos;
+        const novaLista = emEdicao
+          ? produtos.map(p => (p.id === emEdicao.id ? dados : p))
+          : [...produtos, dados];
+
+        if (await gravar(novaLista, 'Produto salvo.')) {
+          apagarFotosSemUso(listaAntiga, novaLista);
+        }
+      } finally {
+        botao.disabled = false;
+      }
     });
 
     $('botaoExcluir').addEventListener('click', async function() {
@@ -575,7 +920,12 @@
         return;
       }
 
-      await gravar(produtos.filter(p => p.id !== emEdicao.id), 'Produto excluído.');
+      const listaAntiga = produtos;
+      const novaLista = produtos.filter(p => p.id !== emEdicao.id);
+
+      if (await gravar(novaLista, 'Produto excluído.')) {
+        apagarFotosSemUso(listaAntiga, novaLista);
+      }
     });
 
     async function gravar(novaLista, textoOk) {
@@ -587,9 +937,11 @@
         $('dialogoProduto').close();
         $('resumo').className = 'mensagem ok';
         $('resumo').textContent = textoOk;
+        return true;
       } catch (erro) {
         $('mensagemProduto').className = 'mensagem erro';
         $('mensagemProduto').textContent = 'Não foi possível salvar: ' + erro.message;
+        return false;
       } finally {
         botao.disabled = false;
       }

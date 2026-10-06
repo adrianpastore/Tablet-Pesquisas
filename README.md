@@ -16,7 +16,10 @@ Todos os produtos ficam num único documento do Firestore (`catalogo/produtos`).
 O tablet faz 1 leitura ao abrir e recebe as alterações sozinho, sem precisar recarregar.
 A última lista fica guardada no tablet, para continuar aparecendo se a internet cair.
 
-As fotos continuam sendo links do Google Drive (o arquivo precisa estar compartilhado como "Qualquer pessoa com o link").
+As fotos podem ser tiradas direto na tela de cadastro (botão "Tirar ou escolher foto"): a foto é reduzida
+e guardada no Firestore, na coleção `fotos`, e o produto fica com `foto:IDENTIFICADOR` no campo da imagem.
+Também dá para usar um link do Google Drive (o arquivo precisa estar compartilhado como "Qualquer pessoa com o link").
+O tablet guarda as fotos que já mostrou, para continuarem aparecendo sem internet.
 
 ## Publicar no GitHub Pages
 
