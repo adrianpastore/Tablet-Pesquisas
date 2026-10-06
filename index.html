@@ -17,6 +17,15 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
+
+    // Ao tocar na tela, entra em tela cheia (esconde a barra de endereço e a do Android)
+    document.addEventListener('pointerdown', function() {
+      const pagina = document.documentElement;
+
+      if (!document.fullscreenElement && pagina.requestFullscreen) {
+        pagina.requestFullscreen({ navigationUI: 'hide' }).catch(function() {});
+      }
+    });
   </script>
 
   <style>
