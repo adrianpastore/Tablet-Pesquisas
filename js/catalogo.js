@@ -251,7 +251,7 @@ export const FORMAS_VENDA = { UN: 'unidade', KG: 'kg' };
 // Lê um preço digitado ("12,90", "R$ 1.234,50", "12.9") e devolve o número,
 // null se estiver vazio ou NaN se não der para entender
 export function lerPreco(texto) {
-  let limpo = String(texto ?? '').replace(/R\$|\s/gi, '');
+  let limpo = String(texto == null ? '' : texto).replace(/R\$|\s/gi, '');
 
   if (!limpo) {
     return null;

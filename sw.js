@@ -4,7 +4,7 @@
 // assim continuam aparecendo se a internet cair.
 // (As fotos tiradas pela tela de cadastro são guardadas por js/catalogo.js.)
 
-const CACHE_SITE = 'site-v4';
+const CACHE_SITE = 'site-v5';
 const CACHE_FOTOS_DRIVE = 'fotos-drive-v1';
 const CACHES_EM_USO = [CACHE_SITE, CACHE_FOTOS_DRIVE, 'fotos-cadastro-v1'];
 

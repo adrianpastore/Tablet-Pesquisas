@@ -27,6 +27,21 @@
       navigator.serviceWorker.register('sw.js');
     }
 
+    // Se o programa da página não abrir (navegador antigo, arquivo pela metade),
+    // troca o "Carregando" por um aviso em vez de ficar girando para sempre
+    setTimeout(function() {
+      if (window.catalogoIniciou) {
+        return;
+      }
+      var conteudo = document.getElementById('conteudo');
+      if (conteudo) {
+        conteudo.innerHTML =
+          '<div class="erro"><h2>Não foi possível abrir o catálogo</h2>' +
+          '<p>Feche e abra de novo. Se continuar, atualize o Google Chrome pela Play Store.</p>' +
+          '<button class="botao-mostrar-todos" onclick="location.reload()">Tentar de novo</button></div>';
+      }
+    }, 20000);
+
     // Ao tocar na tela, entra em tela cheia (esconde a barra de endereço e a do Android)
     document.addEventListener('pointerdown', function() {
       const pagina = document.documentElement;
@@ -858,7 +873,9 @@
       buscarCatalogo,
       enderecoDaImagem,
       produtosParaExibir
-    } from './js/catalogo.js';
+    } from './js/catalogo.js?v=6';
+
+    window.catalogoIniciou = true;
 
     const CHAVE_CACHE = 'tablet-pesquisas:ultima-lista';
     const TEMPO_INATIVIDADE = 100 * 1000;
