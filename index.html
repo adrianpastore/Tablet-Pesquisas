@@ -7,13 +7,22 @@
   <meta name="theme-color" content="#c84f22">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Produtos">
   <link rel="icon" href="icone.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icones/apple-touch-icon.png">
   <script>
-    // Instala o service worker, que deixa o site virar app no tablet
+    // O manifest é o que faz o Chrome oferecer "Instalar app".
+    // Com ?atalho no endereço ele fica de fora, e o Chrome oferece "Adicionar à tela inicial",
+    // para os tablets em que o app instalado não abre.
+    if (!new URLSearchParams(location.search).has('atalho')) {
+      const manifest = document.createElement('link');
+      manifest.rel = 'manifest';
+      manifest.href = 'manifest.json';
+      document.head.appendChild(manifest);
+    }
+
+    // Instala o service worker, que deixa o site abrir sem internet
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }

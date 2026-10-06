@@ -2,7 +2,7 @@
 // Arquivos do site: busca na rede primeiro e guarda a última versão.
 // As fotos do Google Drive ficam por conta do cache normal do navegador.
 
-const CACHE_SITE = 'site-v2';
+const CACHE_SITE = 'site-v3';
 
 const ARQUIVOS = [
   './',
