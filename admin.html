@@ -172,6 +172,40 @@
       font-size: 16px;
     }
 
+    /* Edição rápida de unidade e preço na lista (temporária) */
+    .edicao-rapida {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .edicao-rapida select,
+    .edicao-rapida input {
+      min-height: 40px;
+      border: 2px solid var(--borda);
+      border-radius: 10px;
+      background: var(--branco);
+      color: var(--texto);
+      font-size: 15px;
+    }
+
+    .edicao-rapida select {
+      padding: 0 4px;
+    }
+
+    .edicao-rapida input {
+      width: 90px;
+      padding: 0 8px;
+    }
+
+    .edicao-rapida .salvo {
+      border-color: #1e7b34;
+    }
+
+    .edicao-rapida .com-erro {
+      border-color: var(--perigo);
+    }
+
     .aviso-repetido {
       margin-left: 4px;
       cursor: help;
@@ -583,7 +617,122 @@
       return contagem;
     }
 
+    // EDIÇÃO RÁPIDA (temporária): unidade e preço direto na lista.
+    // Para voltar ao normal, troque criarEdicaoRapida(produto) por
+    // textoVenda(produto) || '—' na coluna Preço de desenharTabela().
+    let filaRapida = Promise.resolve();
+    // Marca verde/vermelha de cada campo e preço inválido digitado, para não sumirem ao redesenhar
+    const marcas = new Map();
+    const precosInvalidos = new Map();
+
+    function criarEdicaoRapida(produto) {
+      const caixa = document.createElement('div');
+      caixa.className = 'edicao-rapida';
+      caixa.addEventListener('click', evento => evento.stopPropagation());
+
+      const forma = document.createElement('select');
+      forma.dataset.id = produto.id;
+      forma.dataset.campo = 'venda';
+      [['', '—'], ['UN', 'Unidade'], ['KG', 'KG']].forEach(function([valor, texto]) {
+        const opcao = document.createElement('option');
+        opcao.value = valor;
+        opcao.textContent = texto;
+        forma.appendChild(opcao);
+      });
+      forma.value = produto.venda || '';
+      forma.className = marcas.get(produto.id + ':venda') || '';
+
+      const preco = document.createElement('input');
+      preco.type = 'text';
+      preco.inputMode = 'decimal';
+      preco.placeholder = 'R$';
+      preco.autocomplete = 'off';
+      preco.dataset.id = produto.id;
+      preco.dataset.campo = 'preco';
+      preco.value = typeof produto.preco === 'number'
+        ? formatarPreco(produto.preco).replace(/R\$\s*/, '')
+        : '';
+      preco.className = marcas.get(produto.id + ':preco') || '';
+
+      if (precosInvalidos.has(produto.id)) {
+        preco.value = precosInvalidos.get(produto.id);
+      }
+
+      forma.addEventListener('change', function() {
+        salvarRapido(produto.id, { venda: forma.value }, forma);
+      });
+
+      preco.addEventListener('change', function() {
+        const valor = lerPreco(preco.value);
+
+        if (Number.isNaN(valor)) {
+          precosInvalidos.set(produto.id, preco.value);
+          marcas.set(produto.id + ':preco', 'com-erro');
+          preco.className = 'com-erro';
+          $('resumo').className = 'mensagem erro';
+          $('resumo').textContent = 'Preço inválido em "' + produto.nome + '". Use só números, como 12,90.';
+          return;
+        }
+
+        precosInvalidos.delete(produto.id);        salvarRapido(produto.id, { preco: valor }, preco);
+      });
+
+      // Enter vai para o preço da linha de baixo
+      preco.addEventListener('keydown', function(evento) {
+        if (evento.key !== 'Enter') {
+          return;
+        }
+
+        evento.preventDefault();
+        const campos = [...document.querySelectorAll('.edicao-rapida input')];
+        const proximo = campos[campos.indexOf(preco) + 1];
+
+        if (proximo) {
+          proximo.focus();
+          proximo.select();
+        } else {
+          preco.blur();
+        }
+      });
+
+      caixa.append(forma, preco);
+      return caixa;
+    }
+
+    // Grava uma alteração de cada vez, sempre sobre a lista mais recente
+    function salvarRapido(id, mudanca, campo) {
+      produtos = produtos.map(p => (p.id === id ? Object.assign({}, p, mudanca) : p));
+      const lista = produtos;
+
+      filaRapida = filaRapida.then(async function() {
+        try {
+          await salvarLista(lista);
+          marcarCampo(id, campo.dataset.campo, 'salvo');
+        } catch (erro) {
+          marcarCampo(id, campo.dataset.campo, 'com-erro');
+          $('resumo').className = 'mensagem erro';
+          $('resumo').textContent = 'Não foi possível salvar: ' + erro.message;
+        }
+      });
+    }
+
+    function marcarCampo(id, nomeCampo, classe) {
+      marcas.set(id + ':' + nomeCampo, classe);
+      const campo = document.querySelector(
+        '.edicao-rapida [data-id="' + CSS.escape(id) + '"][data-campo="' + nomeCampo + '"]'
+      );
+
+      if (campo) {
+        campo.className = classe;
+      }
+    }
+
     function desenharTabela() {
+      // Guarda qual campo da edição rápida estava em uso, para não perder o foco
+      const emUso = document.activeElement;
+      const focoId = emUso && emUso.dataset ? emUso.dataset.id : null;
+      const focoCampo = emUso && emUso.dataset ? emUso.dataset.campo : null;
+      const focoValor = focoCampo === 'preco' ? emUso.value : null;
       const busca = normalizar($('campoBusca').value.trim());
       const palavras = busca.split(/\s+/).filter(Boolean);
       const filtro = $('filtro').value;
@@ -637,7 +786,7 @@
         categoria.textContent = produto.categoria || '—';
 
         const venda = document.createElement('td');
-        venda.textContent = textoVenda(produto) || '—';
+        venda.appendChild(criarEdicaoRapida(produto));
 
         const ativo = document.createElement('td');
         ativo.textContent = produto.ativo ? 'Sim' : 'Não';
@@ -646,6 +795,20 @@
         linha.addEventListener('click', () => abrirProduto(produto));
         corpo.appendChild(linha);
       });
+
+      if (focoId && focoCampo) {
+        const campo = corpo.querySelector(
+          '[data-id="' + CSS.escape(focoId) + '"][data-campo="' + focoCampo + '"]'
+        );
+
+        if (campo) {
+          // Mantém o que estava sendo digitado e ainda não foi salvo
+          if (focoValor !== null) {
+            campo.value = focoValor;
+          }
+          campo.focus();
+        }
+      }
 
       const ativos = produtos.filter(p => p.ativo).length;
       const semFoto = produtos.filter(p => !String(p.imagem || '').trim()).length;
