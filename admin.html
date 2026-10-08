@@ -277,6 +277,17 @@
       text-transform: uppercase;
     }
 
+    th.ordenavel {
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    th.ordenavel:hover,
+    th.ordenavel.ativa {
+      color: var(--principal-escuro);
+    }
+
     tbody tr {
       cursor: pointer;
     }
@@ -430,9 +441,9 @@
           <thead>
             <tr>
               <th>Foto</th>
-              <th>Código</th>
-              <th>Nome</th>
-              <th class="col-categoria">Categoria</th>
+              <th class="ordenavel" data-ordem="codigo">Código</th>
+              <th class="ordenavel" data-ordem="nome">Nome</th>
+              <th class="ordenavel col-categoria" data-ordem="categoria">Categoria</th>
               <th>Preço</th>
               <th>Ativo</th>
             </tr>
@@ -727,6 +738,77 @@
       }
     }
 
+    // Ordem da lista: toque no título da coluna; tocar de novo inverte
+    let ordem = { campo: 'nome', crescente: true };
+
+    try {
+      const guardada = JSON.parse(localStorage.getItem('cadastro:ordem'));
+      if (guardada && ['nome', 'codigo', 'categoria'].includes(guardada.campo)) {
+        ordem = { campo: guardada.campo, crescente: guardada.crescente !== false };
+      }
+    } catch (erro) {
+      // Sem acesso ao armazenamento: fica na ordem por nome
+    }
+
+    function compararTexto(a, b) {
+      return String(a || '').localeCompare(String(b || ''), 'pt-BR', { numeric: true });
+    }
+
+    function compararCodigo(a, b) {
+      return compararTexto(chaveCodigo(a.codigo), chaveCodigo(b.codigo));
+    }
+
+    function compararProdutos(a, b) {
+      const campo = ordem.campo;
+
+      // Sem código ou sem categoria vão sempre para o fim
+      if (campo !== 'nome') {
+        const vazioA = !String(a[campo] || '').trim();
+        const vazioB = !String(b[campo] || '').trim();
+
+        if (vazioA !== vazioB) {
+          return vazioA ? 1 : -1;
+        }
+      }
+
+      let resultado = campo === 'codigo'
+        ? compararCodigo(a, b)
+        : compararTexto(a[campo], b[campo]);
+
+      if (!ordem.crescente) {
+        resultado = -resultado;
+      }
+
+      // Desempate sempre por nome, em ordem alfabética
+      return resultado || compararTexto(a.nome, b.nome);
+    }
+
+    function mostrarOrdem() {
+      document.querySelectorAll('th.ordenavel').forEach(function(titulo) {
+        const ativa = titulo.dataset.ordem === ordem.campo;
+        titulo.classList.toggle('ativa', ativa);
+        titulo.dataset.seta = ativa ? (ordem.crescente ? ' ▲' : ' ▼') : '';
+        titulo.textContent = titulo.textContent.replace(/ [▲▼]$/, '') + titulo.dataset.seta;
+      });
+    }
+
+    document.querySelectorAll('th.ordenavel').forEach(function(titulo) {
+      titulo.addEventListener('click', function() {
+        const campo = titulo.dataset.ordem;
+        ordem = ordem.campo === campo
+          ? { campo, crescente: !ordem.crescente }
+          : { campo, crescente: true };
+
+        try {
+          localStorage.setItem('cadastro:ordem', JSON.stringify(ordem));
+        } catch (erro) {
+          // Sem acesso ao armazenamento: vale só até fechar a página
+        }
+
+        desenharTabela();
+      });
+    });
+
     function desenharTabela() {
       // Guarda qual campo da edição rápida estava em uso, para não perder o foco
       const emUso = document.activeElement;
@@ -748,9 +830,18 @@
             (filtro !== 'semFoto' || !String(p.imagem || '').trim()) &&
             (filtro !== 'repetido' || repetido(p));
         })
-        .sort(filtro === 'repetido'
-          ? (a, b) => chaveCodigo(a.codigo).localeCompare(chaveCodigo(b.codigo), 'pt-BR', { numeric: true })
-          : (a, b) => String(a.nome).localeCompare(String(b.nome), 'pt-BR'));
+        .sort(function(a, b) {
+          // Em "Código repetido", os iguais ficam sempre juntos
+          if (filtro === 'repetido') {
+            const porCodigo = compararCodigo(a, b);
+            if (porCodigo) {
+              return porCodigo;
+            }
+          }
+          return compararProdutos(a, b);
+        });
+
+      mostrarOrdem();
 
       visiveis.forEach(function(produto) {
         const linha = document.createElement('tr');
